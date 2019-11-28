@@ -6,7 +6,7 @@ AUTHOR = 'Johan Vergeer'
 SITENAME = 'RedGyro.com'
 SITEURL = ''
 
-THEME = 'twenty-pelican-html5up'
+THEME = 'themes/material-kit'
 
 PATH = 'content'
 
