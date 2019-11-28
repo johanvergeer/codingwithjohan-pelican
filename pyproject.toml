@@ -6,6 +6,8 @@ authors = ["Johan Vergeer <johanvergeer@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
+pelican = "^4.2"
+markdown = "^3.1"
 
 [tool.poetry.dev-dependencies]
 
