@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends '_layout.html' %}
+{% import 'includes/_article.html' as art %}
+{% import 'includes/_tags.html' as tags %}
 
-</body>
-</html>
+{% block layout_content %}
+<div class="title">
+    <h1>{{ article.title }}</h1>
+</div>
+
+<div class="row mb-1">
+    <div class="col">
+        {{ art.author_and_published(article) }}
+    </div>
+</div>
+<div class="row mb-1">
+    <div class="col">
+        {{ tags.all_tags_for_article(article) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a href="">Back To posts <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>
+    </div>
+</div>
+
+<hr>
+
+{{article.content}}
+{%endblock%}
