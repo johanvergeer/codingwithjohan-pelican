@@ -1,1 +1,61 @@
-{% extends "_layoutBase.html" %}
+{% import 'includes/_article.html' as article %}
+
+<!DOCTYPE html>
+<html>
+    {% include 'includes/_head.html' %}
+<body class="landing-page sidebar-collapse">
+    {% include 'includes/_nav.html' %}
+
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url('{{ SITEURL }}/theme/img/passion-led-us-here.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="title">I'm Johan</h1>
+                    <h4>Doing what I like, and liking what I do</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main main-raised">
+        <div class="section section-basic">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="title mb-5">
+                            <h1>Latest posts</h1>
+                        </div>
+                        {% for a in articles %}
+                            {{ article.article_excerpt(a) }}
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-md-4">
+                        
+                        <h1>Tags</h1>
+
+                        <div>
+<!--                            @Html.Partial("Partials/Tags/_AllTagsPartial")-->
+                        </div>
+                    </div>
+                </div>
+
+<!--                @if(Model.Bool(Keys.HasPreviousPage)) {-->
+<!--                    <a href="@(Context.GetLink(Model.Document(Keys.PreviousPage)))"><span aria-hidden="true">&larr;</span> Newer</a> -->
+<!--                } -->
+
+<!--                @if(Model.Bool(Keys.HasNextPage)) {-->
+<!--                    <a href="@(Context.GetLink(Model.Document(Keys.NextPage)))">Older <span aria-hidden="true">&rarr;</span></a> -->
+<!--                }-->
+
+<!--                @if(Context.Bool(BlogKeys.GenerateArchive))-->
+<!--                {-->
+<!--                    <a href="@Context.GetLink(Context.String(BlogKeys.PostsPath))">All Posts <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>-->
+<!--                }-->
+            </div>
+        </div>
+    </div>
+    {% include 'includes/_footer.html' %}
+    {% include 'includes/_scripts.html' %}
+</body>
+</html>
+

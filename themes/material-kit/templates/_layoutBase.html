@@ -2,7 +2,11 @@
 <html>
 {% include 'includes/_head.html' %}
 <body class="profile-page sidebar-collapse">
+{% include 'includes/_nav.html' %}
+
+{% block content %}{% endblock %}
 
 {% include 'includes/_footer.html' %}
+{% include 'includes/_scripts.html' %}
 </body>
 </html>

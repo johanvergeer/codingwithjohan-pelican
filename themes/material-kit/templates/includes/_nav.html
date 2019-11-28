@@ -1,0 +1,77 @@
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100"
+     id="sectionsNav">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="/">
+                I'm Johan
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <!--                @{-->
+                <!--                List-->
+                <!--                <Tuple-->
+                <!--                <string-->
+                <!--                , string>> pages = Context-->
+                <!--                .Documents[Blog.Pages]-->
+                <!--                .Where(x => x.Bool(BlogKeys.ShowInNavbar, true))-->
+                <!--                .Where(x => x.FilePath(Keys.RelativeFilePath)?.FullPath?.StartsWith("index") == (bool?)false)-->
+                <!--                .Select(x => Tuple.Create(x.WithoutSettings.String(Keys.Title), Context.GetLink(x)))-->
+                <!--                .Where(x => !string.IsNullOrEmpty(x.Item1))-->
+                <!--                .OrderBy(x => x.Item1)-->
+                <!--                .ToList();-->
+
+                <!--                if(Documents[Blog.BlogPosts].Any() && Context.Bool(BlogKeys.GenerateArchive))-->
+                <!--                {-->
+                <!--                var archiveLink = Context.GetLink(Context.String(BlogKeys.PostsPath)) + "/index.html";-->
+                <!--                <li class="nav-item">-->
+                <!--                    <a class="nav-link" href="@(archiveLink)">-->
+                <!--                        <i class="fa fa-blog"></i>-->
+                <!--                        Blog-->
+                <!--                    </a>-->
+                <!--                </li>-->
+                <!--                }-->
+
+                <!--                foreach(Tuple-->
+                <!--                <string-->
+                <!--                , string> page in pages)-->
+                <!--                {-->
+                <!--                var FontAwesome = Context.Documents[Blog.Pages]-->
+                <!--                .Where(x => Context.GetLink(x) == page.Item2)-->
+                <!--                .Select(x => x.Get-->
+                <!--                <string>("FontAwesome"))-->
+                <!--                    .FirstOrDefault() ?? "angle-double-right";-->
+
+                <!--                    <li class="nav-item">-->
+                <!--                        <a class="nav-link" href="@(page.Item2)">-->
+                <!--                            <i class="fa fa-@(FontAwesome)"></i>-->
+                <!--                            @(page.Item1)-->
+                <!--                        </a>-->
+                <!--                    </li>-->
+                <!--                    }-->
+                <!--                    }-->
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                       href="https://github.com/johanvergeer" target="_blank"
+                       data-original-title="Follow me on GitHub">
+                        <i class="fab fa-github fa-2x"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                       href="https://www.linkedin.com/in/johanvergeer" target="_blank"
+                       data-original-title="Join my network on">
+                        <i class="fab fa-linkedin fa-2x"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
