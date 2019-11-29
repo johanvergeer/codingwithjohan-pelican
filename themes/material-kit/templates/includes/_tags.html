@@ -1,5 +1,5 @@
 {% macro tag_as_pill(tag) %}
-<a href="{{ tag.url }}" class="badge badge-pill badge-lg badge-primary">
+<a href="{{ SITEURL }}/{{ tag.url }}" class="badge badge-pill badge-lg badge-primary">
     {{ tag.name }}
 </a>
 {% endmacro %}
