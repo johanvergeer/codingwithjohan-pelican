@@ -2,7 +2,7 @@
 {% import 'includes/_tags.html' as tag %}
 
 <!DOCTYPE html>
-<html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock html_lang %}">
 {% include 'includes/_head.html' %}
 <body class="landing-page sidebar-collapse">
 {% include 'includes/_nav.html' %}
@@ -28,11 +28,21 @@
                     </div>
                     {% for a in articles_page.object_list %}
                         {{ article.article_excerpt(a) }}
+                        {% if loop.index == ARTICLES_ON_HOMEPAGE %}
+                            {% break %}
+                        {% endif %}
                     {% endfor %}
                 </div>
 
                 <div class="col-md-4">
-                    <h1>Tags</h1>
+                    <h2>Categories</h2>
+                    <div>
+                        {% for c, _ in categories %}
+                            {{ tag.tag_as_pill(c) }}
+                        {% endfor %}
+                    </div>
+                    <hr/>
+                    <h2>Tags</h2>
                     <div>
                         {% for t, _ in tags %}
                             {{ tag.tag_as_pill(t) }}

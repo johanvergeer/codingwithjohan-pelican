@@ -27,11 +27,14 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-# Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+# ==================================================
+# Jinja2
+# ==================================================
+JINJA_ENVIRONMENT = {
+    'extensions': [
+        'jinja2.ext.loopcontrols'
+    ]
+}
 
 # Social widget
 SOCIAL = (('linkedin', 'https://www.linkedin.com/in/johanvergeer', 'Join my network'),
@@ -41,5 +44,16 @@ SOCIAL = (('linkedin', 'https://www.linkedin.com/in/johanvergeer', 'Join my netw
 # Pagination
 DEFAULT_PAGINATION = 1
 
-# Uncomment following line if you want document-relative URLs when developing
-# RELATIVE_URLS = True
+ARTICLES_ON_HOMEPAGE = 5
+
+PAGINATED_TEMPLATES = {
+    'index': None,
+    'tag': 1,
+    'category': 1,
+    'author': None
+}
+
+PAGINATION_PATTERNS = (
+    (1, '{base_name}/', '{base_name}/index.html'),
+    (2, '{base_name}/{number}/', '{base_name}/{number}/index.html'),
+)
