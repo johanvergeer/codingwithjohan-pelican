@@ -30,20 +30,15 @@
                         </li>
                     {% endfor %}
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
-                       href="https://github.com/johanvergeer" target="_blank"
-                       data-original-title="Follow me on GitHub">
-                        <i class="fab fa-github fa-2x"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
-                       href="https://www.linkedin.com/in/johanvergeer" target="_blank"
-                       data-original-title="Join my network on">
-                        <i class="fab fa-linkedin fa-2x"></i>
-                    </a>
-                </li>
+                {% for name, link, title in SOCIAL %}
+                    <li class="nav-item">
+                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                           href="{{ link }}" target="_blank"
+                           data-original-title="{{ title }}">
+                            <i class="fab fa-{{ name }} fa-2x"></i>
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
