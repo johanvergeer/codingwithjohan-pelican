@@ -1,8 +1,9 @@
 {% import 'includes/_tags.html' as tags %}
 
-{% macro author_and_published(article) %}
+{% macro author_published_category(article) %}
     <span class="mr-3"><i class="fa fa-user"></i> {{article.author}}</span>
-    <span><i class="fa fa-calendar"></i> <time>{{article.date}}</time></span>
+    <span><i class="fa fa-calendar"></i> <time>{{article.locale_date}}</time></span>
+    <a href="{{article.category.url}}"><i class="ml-3 fa fa-th-large"></i> {{article.category}}</a>
 {% endmacro %}
 
 {% macro article_excerpt(article) %}
@@ -18,7 +19,7 @@
         <div class="container-fluid">
             <div class="d-flex flex-row-reverse">
                 <div class="p-1">
-                    {{ author_and_published(article) }}
+                    {{ author_published_category(article) }}
                 </div>
             </div>
             <div class="d-flex flex-row-reverse">
