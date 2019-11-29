@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+from pelican.paginator import PaginationRule
 
 AUTHOR = 'Johan Vergeer'
 SITENAME = 'RedGyro.com'
@@ -16,11 +17,9 @@ DEFAULT_LANG = 'en'
 
 USE_FOLDER_AS_CATEGORY = True
 
-# Articles
-ARTICLE_URL = 'articles/{category}/{slug}/'
-ARTICLE_SAVE_AS = 'articles/{category}/{slug}/index.html'
-
-# Feed generation is usually not desired when developing
+# ==================================================
+# Feed generation
+# ==================================================
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
@@ -36,24 +35,44 @@ JINJA_ENVIRONMENT = {
     ]
 }
 
+
+# ==================================================
 # Social widget
+# ==================================================
 SOCIAL = (('linkedin', 'https://www.linkedin.com/in/johanvergeer', 'Join my network'),
-          ('github', 'https://github.com/johanvergeer', 'Follow me on GitHub'),
+          ('github', 'https://github.com/johanvergeer', 'Fork me on GitHub'),
           ('stack-overflow', 'https://stackoverflow.com/users/5039579/johan-vergeer', 'Follow me on StackOverflow'),)
 
-# Pagination
-DEFAULT_PAGINATION = 1
+# ==================================================
+# URLS and pagination
+# ==================================================
+ARTICLE_URL = 'articles/{category}/{slug}/'
+ARTICLE_SAVE_AS = 'articles/{category}/{slug}/index.html'
+
+TAG_URL = 'tag/{slug}/'
+TAG_SAVE_AS = 'tag/{slug}/index.html'
+
+CATEGORY_URL = 'category/{slug}/'
+CATEGORY_SAVE_AS = 'category/{slug}/index.html'
+
+AUTHOR_URL = 'author/{slug}/'
+AUTHOR_SAVE_AS = 'author/{slug}/index.html'
+
+YEAR_ARCHIVE_URL = 'articles/{date:%Y}/'
+YEAR_ARCHIVE_SAVE_AS = 'articles/{date:%Y}/index.html'
+MONTH_ARCHIVE_URL = 'articles/{date:%Y}/{date:%b}/'
+MONTH_ARCHIVE_SAVE_AS = 'articles/{date:%Y}/{date:%b}/index.html'
 
 ARTICLES_ON_HOMEPAGE = 5
 
 PAGINATED_TEMPLATES = {
     'index': None,
     'tag': 1,
-    'category': 1,
-    'author': None
+    'category': 10,
+    'author': 10,
 }
 
 PAGINATION_PATTERNS = (
-    (1, '{base_name}/', '{base_name}/index.html'),
-    (2, '{base_name}/{number}/', '{base_name}/{number}/index.html'),
+    (1, '{url}/', '{base_name}/index.html'),
+    (2, '{url}/{number}/', '{base_name}/{number}/index.html'),
 )

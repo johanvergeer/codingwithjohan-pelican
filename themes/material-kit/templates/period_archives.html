@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends '_layout.html' %}
+{% import '_macros.html' as macros %}
+{% import 'includes/_article.html' as article %}
 
-</body>
-</html>
+{% block layout_content %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="title mb-5">
+                <h1>Articles for {{ period | reverse | join(' ') }}</h1>
+            </div>
+
+            {% for a in dates %}
+                {{ article.article_excerpt(a) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
