@@ -18,6 +18,15 @@ DEFAULT_LANG = 'en'
 USE_FOLDER_AS_CATEGORY = True
 
 # ==================================================
+# Plugins
+# ==================================================
+
+PLUGINS = [
+    'pelican_gist',
+    'pelican_just_table'
+]
+
+# ==================================================
 # Feed generation
 # ==================================================
 FEED_ALL_ATOM = None
@@ -34,7 +43,6 @@ JINJA_ENVIRONMENT = {
         'jinja2.ext.loopcontrols'
     ]
 }
-
 
 # ==================================================
 # Social widget
@@ -76,3 +84,39 @@ PAGINATION_PATTERNS = (
     (1, '{url}/', '{base_name}/index.html'),
     (2, '{url}/{number}/', '{base_name}/{number}/index.html'),
 )
+
+
+# ==================================================
+# JTable
+# ==================================================
+JTABLE_TEMPLATE = """
+<table class="table">
+    {% if caption %}
+    <caption> {{ caption }} </caption>
+    {% endif %}
+    {% if th != 0 %}
+    <thead>
+    <tr>
+        {% if ai == 1 %}
+        <th> No. </th>
+        {% endif %}
+        {% for head in heads %}
+        <th>{{ head }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    {% endif %}
+    <tbody>
+        {% for body in bodies %}
+        <tr>
+            {% if ai == 1 %}
+            <td> {{ loop.index }} </td>
+            {% endif %}
+            {% for entry in body %}
+            <td>{{ entry }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+"""
