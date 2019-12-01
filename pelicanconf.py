@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
-from pelican.paginator import PaginationRule
 
 AUTHOR = 'Johan Vergeer'
 SITENAME = 'RedGyro.com'
@@ -23,7 +22,7 @@ USE_FOLDER_AS_CATEGORY = True
 
 PLUGINS = [
     'pelican_gist',
-    'pelican_just_table'
+    'pelican.plugins.add_css_classes'
 ]
 
 # ==================================================
@@ -85,7 +84,6 @@ PAGINATION_PATTERNS = (
     (2, '{url}/{number}/', '{base_name}/{number}/index.html'),
 )
 
-
 # ==================================================
 # JTable
 # ==================================================
@@ -120,3 +118,14 @@ JTABLE_TEMPLATE = """
     </tbody>
 </table>
 """
+
+ADD_CSS_CLASSES = {
+    "table": ["table"],
+}
+
+ADD_CSS_CLASSES_TO_PAGE = {
+}
+
+ADD_CSS_CLASSES_TO_ARTICLE = {
+    "blockquote": ["blockquote"],
+}

@@ -29,15 +29,14 @@ Now that we know `System.Guid` is a UUID version 4, let's see what that means. A
 - A UUID uses the IEEE 802 address (MAC Address) which is usually available on all network attached systems
 - The table below shows how the format of a UUID. (An octed is equivalent to a byte)
 
-[jtable]
-Field, Data Type,Octet #,Note                                                                 
-time_low, unsigned 32 bit integer,0-3,The low field of the timestamp.                                      
-time_mid,unsigned 16 bit integer,4-5,The middle field of the timestamp.                                   
-time_hi_and_version,unsigned 16 bit integer,6-7,The high field of the timestamp multiplexed with the version number. 
-clock_seq_hi_and_reserved,unsigned 8 bit integer,8,The high field of theclock sequence multiplexed with the variant.    
-clock_seq_low,unsigned 8 bit integer,9,The low field of the clock sequence.                                 
-node,unsigned 48 bit integer,10-15,The spatially unique node identifier.  
-[/jtable]
+| Field                     | Data Type               | Octet # | Note                                                                 |
+| ------------------------- | ----------------------- | ------- | -------------------------------------------------------------------- |
+| time_low                  | unsigned 32 bit integer | 0-3     | The low field of the timestamp.                                      |
+| time_mid                  | unsigned 16 bit integer | 4-5     | The middle field of the timestamp.                                   |
+| time_hi_and_version       | unsigned 16 bit integer | 6-7     | The high field of the timestamp multiplexed with the version number. |
+| clock_seq_hi_and_reserved | unsigned 8 bit integer  | 8       | The high field of theclock sequence multiplexed with the variant.    |
+| clock_seq_low             | unsigned 8 bit integer  | 9       | The low field of the clock sequence.                                 |
+| node                      | unsigned 48 bit integer | 10-15   | The spatially unique node identifier.                                |
 
 So how does this look? Here is an example with a breakdown. As we have already seen before, the time stamp is in the most significant 4 bits of time_hi_and_version.
 
