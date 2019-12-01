@@ -56,6 +56,9 @@ SOCIAL = (('linkedin', 'https://www.linkedin.com/in/johanvergeer', 'Join my netw
 ARTICLE_URL = 'articles/{category}/{slug}/'
 ARTICLE_SAVE_AS = 'articles/{category}/{slug}/index.html'
 
+PAGE_URL = 'pages/{slug}/'
+PAGE_SAVE_AS = 'pages/{slug}/index.html'
+
 TAG_URL = 'tag/{slug}/'
 TAG_SAVE_AS = 'tag/{slug}/index.html'
 
