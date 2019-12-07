@@ -1,6 +1,6 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/index.js',
@@ -28,6 +28,14 @@ module.exports = {
                     },
                     {
                         loader: "sass-loader",
+                        options: {
+                            sassOptions: {
+                                indentWidth: 4,
+                                includePaths: [
+                                    'node_modules/material-kit/assets/scss',
+                                ],
+                            },
+                        },
                     }
                 ]
             },
@@ -43,7 +51,15 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
+            {
+                // Exposes jQuery for use outside Webpack build
+                test: require.resolve('jquery'),
+                use: [
+                    {loader: 'expose-loader', options: 'jQuery'},
+                    {loader: 'expose-loader', options: '$'}
+                ]
+            },
         ]
     },
     plugins: [
@@ -51,5 +67,13 @@ module.exports = {
             filename: "css/[name].css?[hash]",
             chunkFilename: "css/[name].css?[hash]"
         }),
+        new webpack.ProvidePlugin({
+            'window.jQuery': 'jquery',
+            'window.$': 'jquery',
+            'jQuery': 'jquery',
+            '$': 'jquery',
+            'Popper': ['popper.js', 'default']
+        }),
     ]
-};
+}
+;
