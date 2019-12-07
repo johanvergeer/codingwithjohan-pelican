@@ -90,6 +90,7 @@ def livereload(c):
     from livereload import Server
     build(c)
     server = Server()
+
     # Watch the base settings file
     server.watch(CONFIG['settings_base'], lambda: build(c))
     # Watch content source files
@@ -99,12 +100,14 @@ def livereload(c):
         server.watch(content_blob, lambda: build(c))
     # Watch the theme's templates and static assets
     theme_path = SETTINGS['THEME']
+
     server.watch(f'{theme_path}/templates/**/*.html', lambda: build(c))
     server.watch(f'{theme_path}/templates/*.html', lambda: build(c))
     static_file_extensions = ['.css', '.js']
     for extension in static_file_extensions:
         static_file = f'{theme_path}/static/**/*{extension}'
         server.watch(static_file, lambda: build(c))
+
     # Serve output path on configured port
     server.serve(port=CONFIG['port'], root=CONFIG['deploy_path'])
 
