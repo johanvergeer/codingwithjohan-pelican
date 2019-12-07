@@ -35,6 +35,8 @@ MARKDOWN = {
         'pymdownx.emoji',
         'pymdownx.highlight',
         'pymdownx.mark',
+        'pymdownx.progressbar',
+        'pymdownx.superfences',
     ],
     'extension_configs': {
         "pymdownx.emoji": {
