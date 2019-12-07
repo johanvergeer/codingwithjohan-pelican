@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+from pymdownx import emoji
 
 AUTHOR = 'Johan Vergeer'
 SITENAME = 'RedGyro.com'
@@ -22,8 +23,35 @@ USE_FOLDER_AS_CATEGORY = True
 
 PLUGINS = [
     'pelican_gist',
-    'pelican.plugins.add_css_classes'
+    'pelican.plugins.add_css_classes',
+    'boxes'
 ]
+
+# ==================================================
+# Markdown
+# ==================================================
+MARKDOWN = {
+    'extensions': [
+        'pymdownx.emoji',
+        'pymdownx.highlight',
+        'pymdownx.mark',
+    ],
+    'extension_configs': {
+        "pymdownx.emoji": {
+            "emoji_index": emoji.gemoji,
+            "emoji_generator": emoji.to_svg,
+            "alt": "short",
+            "options": {
+                "attributes": {
+                    "align": "absmiddle",
+                    "height": "20px",
+                    "width": "20px"
+                },
+            }
+        }
+    },
+    'output_format': 'html5',
+}
 
 # ==================================================
 # Feed generation
@@ -90,40 +118,9 @@ PAGINATION_PATTERNS = (
 # ==================================================
 # JTable
 # ==================================================
-JTABLE_TEMPLATE = """
-<table class="table">
-    {% if caption %}
-    <caption> {{ caption }} </caption>
-    {% endif %}
-    {% if th != 0 %}
-    <thead>
-    <tr>
-        {% if ai == 1 %}
-        <th> No. </th>
-        {% endif %}
-        {% for head in heads %}
-        <th>{{ head }}</th>
-        {% endfor %}
-    </tr>
-    </thead>
-    {% endif %}
-    <tbody>
-        {% for body in bodies %}
-        <tr>
-            {% if ai == 1 %}
-            <td> {{ loop.index }} </td>
-            {% endif %}
-            {% for entry in body %}
-            <td>{{ entry }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-"""
-
 ADD_CSS_CLASSES = {
     "table": ["table"],
+    "div.admonition.danger": ["foo"]
 }
 
 ADD_CSS_CLASSES_TO_PAGE = {

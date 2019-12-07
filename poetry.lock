@@ -38,8 +38,19 @@ category = "main"
 description = "Docutils -- Python Documentation Utilities"
 name = "docutils"
 optional = false
-python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
-version = "0.15.2"
+python-versions = "*"
+version = "0.14"
+
+[[package]]
+category = "main"
+description = "PEP 561 type stubs for docutils"
+name = "docutils-stubs"
+optional = false
+python-versions = ">=3.5"
+version = "0.0.21"
+
+[package.dependencies]
+docutils = "0.14"
 
 [[package]]
 category = "main"
@@ -157,11 +168,31 @@ requests = ">=2.2.0"
 
 [[package]]
 category = "main"
+description = "Backport of PEP 562."
+name = "pep562"
+optional = false
+python-versions = "*"
+version = "1.0"
+
+[[package]]
+category = "main"
 description = "Pygments is a syntax highlighting package written in Python."
 name = "pygments"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "2.5.2"
+
+[[package]]
+category = "main"
+description = "Extension pack for Python Markdown."
+name = "pymdown-extensions"
+optional = false
+python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
+version = "6.2"
+
+[package.dependencies]
+Markdown = ">=3.0.1"
+pep562 = "*"
 
 [[package]]
 category = "main"
@@ -245,7 +276,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4"
 version = "1.25.7"
 
 [metadata]
-content-hash = "2335853883fe40150cde0ccca7c150218dcd38dc36868c630b5c1ca92c01fc14"
+content-hash = "89ea0c59284214b96584dcd962e4b75c0496008e01ecf726f5b02d1b2e7a66f0"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -253,7 +284,8 @@ beautifulsoup4 = ["5279c36b4b2ec2cb4298d723791467e3000e5384a43ea0cdf5d45207c7e97
 blinker = ["471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"]
 certifi = ["017c25db2a153ce562900032d5bc68e9f191e44e9a0f762f373977de9df1fbb3", "25b64c7da4cd7479594d035c08c2d809eb4aab3a26e5a990ea98cc450c320f1f"]
 chardet = ["84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae", "fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"]
-docutils = ["6c4f696463b79f1fb8ba0c594b63840ebd41f059e92b31957c46b74a4599b6d0", "9e4d7ecfc600058e07ba661411a2b7de2fd0fafa17d1a7f7361cd47b1175c827", "a2aeea129088da402665e92e0b25b04b073c04b2dce4ab65caaa38b7ce2e1a99"]
+docutils = ["02aec4bd92ab067f6ff27a38a38a41173bf01bed8f89157768c1573f53e474a6", "51e64ef2ebfb29cae1faa133b3710143496eca21c530f3f71424d77687764274", "7a4bd47eaf6596e1295ecb11361139febe29b084a87bf005bf899f9a42edc3c6"]
+docutils-stubs = ["d8beb6ffac94d2db39179681f6bc17a3b81d3386201dc8b1aec3d61201b1edc9", "e0d3d2588a0c0b47bf66b917bf4ff2c100cf4cf77bbe2f518d97b8f4d63e735c"]
 feedgenerator = ["5ae05daa9cfa47fa406ee4744d0b7fa1c8a05a7a47ee0ad328ddf55327cfb106"]
 idna = ["c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407", "ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c"]
 invoke = ["c52274d2e8a6d64ef0d61093e1983268ea1fc0cd13facb9448c4ef0c9a7ac7da", "f4ec8a134c0122ea042c8912529f87652445d9f4de590b353d23f95bfa1f0efd", "fc803a5c9052f15e63310aa81a43498d7c55542beb18564db88a9d75a176fa44"]
@@ -264,7 +296,9 @@ markupsafe = ["00bc623926325b26bb9605ae9eae8a215691f33cae5df11ca5424f06f2d1f473"
 pelican = ["656d8ff9f778951f4e317c9e6530e92b02698c5961ebf019c583775a30f857f6", "be7ea9a09311374322b5579c88975ae003409e40c833e761780a0d0dbd84e756"]
 pelican-add-css-classes = ["64e51645880638207b402c6fd08a8286bf0db8f5a055bf0561b2d19ce79445a9", "d021fd293323d68fd53bb00e7a14f25674d77b6d14efef514ea57482a8d95fda"]
 pelican-gist = ["30dff80128773790ec17542cc672e1b5565b546180db9b5f51dd5933c5576b06", "5c91f07a0d573d209af6e8fe4851a4281717eedee8567fdbcd88c2a798c86f4d"]
+pep562 = ["58cb1cc9ee63d93e62b4905a50357618d526d289919814bea1f0da8f53b79395", "d2a48b178ebf5f8dd31709cc26a19808ef794561fa2fe50ea01ea2bad4d667ef"]
 pygments = ["2a3fe295e54a20164a9df49c75fa58526d3be48e14aceba6d6b1e8ac0bfd6f1b", "98c8aa5a9f778fcd1026a17361ddaf7330d1b7c62ae97c3bb0ae73e0b9b6b0fe"]
+pymdown-extensions = ["27953f071d37b63d418738f75d847d824c0e4430e93f085cfdd9f8dc08a8c5c3", "328b9e114925729e0789558a94325be8e7ca9e0323ed2a2b705d9bc1de4d2716"]
 python-dateutil = ["73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c", "75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"]
 pytz = ["1c557d7d0e871de1f5ccd5833f60fb2550652da6be2693c1e02300743d21500d", "b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be"]
 requests = ["11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4", "9cf5292fcd0f598c671cfc1e0d7d1a7f13bb8085e9a590f48c010551dc6c4b31"]
