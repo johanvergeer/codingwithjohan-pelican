@@ -28,16 +28,23 @@ class AdmonitionExtension(Extension):
 
 
 class AdmonitionProcessor(BlockProcessor):
-
     CLASSNAME = 'mk-card'
-    RE = re.compile(r'(?:^|\n)!!! ?([\w\-]+(?: +[\w\-]+)*)(?: +\[title=(.*?)\])? *(?:\n|$)')
+    RE = re.compile(
+        r'(?:^|\n)!!! ?([\w\-]+(?: +[\w\-]+)*)'
+        r'(?: +\[title=(.*?)])? *'
+        r'(?: +\[width-class=(.*?)])? *'
+        r'(?: +\[subtitle=(.*?)])? *'
+        r'(?: +\[icon=(.*?)])? *'
+        r'(?: +\[color=(.*?)])? *'
+        r'(?:\n|$)'
+    )
     RE_SPACES = re.compile('  +')
 
     def test(self, parent, block):
         sibling = self.lastChild(parent)
         return self.RE.search(block) or \
-            (block.startswith(' ' * self.tab_length) and sibling is not None and
-             sibling.get('class', '').find(self.CLASSNAME) != -1)
+               (block.startswith(' ' * self.tab_length) and sibling is not None and
+                sibling.get('class', '').find(self.CLASSNAME) != -1)
 
     def run(self, parent: Element, blocks):
         sibling = self.lastChild(parent)
@@ -51,25 +58,56 @@ class AdmonitionProcessor(BlockProcessor):
 
         if m:
             klass, title = self.get_class_and_title(m)
+            width_class = self.get_width_class(m)
+            icon = self.get_icon(m)
+            subtitle = self.get_subtitle(m)
+            color = self.get_color(m)
 
             row = etree.SubElement(parent, 'div')
             row.set('class', f'row {self.CLASSNAME}')
 
             col = etree.SubElement(row, 'div')
-            col.set('class', 'col-md-12')
+            col.set('class', width_class)
 
             card = etree.SubElement(col, 'div')
             card.set('class', f'card {klass}')
-            if title:
-                card_header = etree.SubElement(card, 'div')
-                card_header.set('class', 'card-header')
 
+            card_header = etree.SubElement(card, 'div')
+            card_header.set('class', 'card-header')
+
+            if color:
+                card_header.attrib['class'] += f' card-header-{color}'
+
+            card_body = etree.SubElement(card, 'div')
+            card_body.set('class', 'card-body')
+
+            if icon:
+                card_header.attrib['class'] += ' card-header-icon'
+
+                card_icon = etree.SubElement(card_header, 'div')
+                card_icon.set('class', 'card-icon')
+
+                card_icon_i = etree.SubElement(card_icon, 'i')
+                card_icon_i.set('class', 'material-icons')
+                card_icon_i.text = icon
+
+                if klass.lower() != title.lower():
+                    card_title = etree.SubElement(card_body, 'h4')
+                    card_title.set('class', 'card-title')
+                    card_title.text = title
+
+                if subtitle:
+                    print('Subtitle is not supported in conjunction with an icon.')
+
+            else:
                 card_title = etree.SubElement(card_header, 'h4')
                 card_title.set('class', 'card-title')
                 card_title.text = title
 
-            card_body = etree.SubElement(card, 'div')
-            card_body.set('class', 'card-body')
+                if subtitle:
+                    card_subtitle = etree.SubElement(card_header, 'p')
+                    card_subtitle.set('class', 'category')
+                    card_subtitle.text = subtitle
         else:
             card_body = sibling.find(".//div[@class = 'card-body']")
 
@@ -80,6 +118,21 @@ class AdmonitionProcessor(BlockProcessor):
             # line. Insert these lines as the first block of the master blocks
             # list for future processing.
             blocks.insert(0, the_rest)
+
+    def get_color(self, match):
+        return match.group(6)
+
+    def get_icon(self, match):
+        return match.group(5)
+
+    def get_width_class(self, match):
+        width_class = match.group(3)
+        if width_class is None:
+            return 'col-md-12'
+        return width_class
+
+    def get_subtitle(self, match):
+        return match.group(4)
 
     def get_class_and_title(self, match):
         klass, title = match.group(1).lower(), match.group(2)
