@@ -9,6 +9,7 @@ Original code Copyright [Tiago Serafim](https://www.tiagoserafim.com/).
 All changes Copyright The Python Markdown Project
 License: [BSD](https://opensource.org/licenses/bsd-license.php)
 """
+from xml.etree.ElementTree import Element
 
 from markdown import Extension
 from markdown.blockprocessors import BlockProcessor
@@ -39,8 +40,9 @@ class AdmonitionProcessor(BlockProcessor):
             (block.startswith(' ' * self.tab_length) and sibling is not None and
              sibling.get('class', '').find(self.CLASSNAME) != -1)
 
-    def run(self, parent, blocks):
+    def run(self, parent: Element, blocks):
         sibling = self.lastChild(parent)
+        print(type(parent))
         block = blocks.pop(0)
         m = self.RE.search(block)
 
@@ -48,22 +50,28 @@ class AdmonitionProcessor(BlockProcessor):
             block = block[m.end():]  # removes the first line
 
         block, theRest = self.detab(block)
+        print("Block => ", block)
+        print("theRest => ", theRest)
 
         if m:
             klass, title = self.get_class_and_title(m)
-            div = etree.SubElement(parent, 'div')
-            div.set('class', '{} {}'.format(self.CLASSNAME, klass))
+            card = etree.SubElement(parent, 'div')
+            card.set('class', '{} {}'.format(self.CLASSNAME, klass))
             if title:
-                card_header = etree.SubElement(div, 'div')
+                card_header = etree.SubElement(card, 'div')
                 card_header.set('class', 'card-header')
 
                 card_title = etree.SubElement(card_header, 'h4')
                 card_title.set('class', 'card-title')
                 card_title.text = title
-        else:
-            div = sibling
 
-        self.parser.parseChunk(div, block)
+            card_body = etree.SubElement(card, 'div')
+            card_body.set('class', 'card-body')
+        else:
+            card_body = sibling.find("./div[@class = 'card-body']")
+            print("card body => ", card_body)
+
+        self.parser.parseChunk(card_body, block)
 
         if theRest:
             # This block contained unindented line(s) after the first indented
