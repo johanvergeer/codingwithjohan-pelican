@@ -9,6 +9,7 @@ Original code Copyright [Tiago Serafim](https://www.tiagoserafim.com/).
 All changes Copyright The Python Markdown Project
 License: [BSD](https://opensource.org/licenses/bsd-license.php)
 """
+from typing import Optional, AnyStr, Pattern
 from xml.etree.ElementTree import Element
 
 from markdown import Extension
@@ -29,16 +30,7 @@ class AdmonitionExtension(Extension):
 
 class AdmonitionProcessor(BlockProcessor):
     CLASSNAME = 'mk-card'
-    RE = re.compile(
-        r'(?:^|\n)!!! ?([\w\-]+(?: +[\w\-]+)*)'
-        r'(?: +\[title=(.*?)])? *'
-        r'(?: +\[width-class=(.*?)])? *'
-        r'(?: +\[subtitle=(.*?)])? *'
-        r'(?: +\[icon=(.*?)])? *'
-        r'(?: +\[color=(.*?)])? *'
-        r'(?:\n|$)'
-    )
-    RE_SPACES = re.compile('  +')
+    RE = re.compile(r'(?:^|\n)!!! card( *\[[a-z-]+=(.*)])*(?:\n|$)')
 
     def test(self, parent, block):
         sibling = self.lastChild(parent)
@@ -48,8 +40,15 @@ class AdmonitionProcessor(BlockProcessor):
 
     def run(self, parent: Element, blocks):
         sibling = self.lastChild(parent)
-        block = blocks.pop(0)
+        block: str = blocks.pop(0)
+
         m = self.RE.search(block)
+
+        title = self._get_title(block)
+        width_class = self._get_width_class(block)
+        icon = self._get_icon(block)
+        subtitle = self._get_subtitle(block)
+        color = self._get_color(block)
 
         if m:
             block = block[m.end():]  # removes the first line
@@ -57,12 +56,6 @@ class AdmonitionProcessor(BlockProcessor):
         block, the_rest = self.detab(block)
 
         if m:
-            klass, title = self.get_class_and_title(m)
-            width_class = self.get_width_class(m)
-            icon = self.get_icon(m)
-            subtitle = self.get_subtitle(m)
-            color = self.get_color(m)
-
             row = etree.SubElement(parent, 'div')
             row.set('class', f'row {self.CLASSNAME}')
 
@@ -70,7 +63,7 @@ class AdmonitionProcessor(BlockProcessor):
             col.set('class', width_class)
 
             card = etree.SubElement(col, 'div')
-            card.set('class', f'card {klass}')
+            card.set('class', f'card')
 
             card_header = etree.SubElement(card, 'div')
             card_header.set('class', 'card-header')
@@ -91,7 +84,7 @@ class AdmonitionProcessor(BlockProcessor):
                 card_icon_i.set('class', 'material-icons')
                 card_icon_i.text = icon
 
-                if klass.lower() != title.lower():
+                if title:
                     card_title = etree.SubElement(card_body, 'h4')
                     card_title.set('class', 'card-title')
                     card_title.text = title
@@ -119,34 +112,34 @@ class AdmonitionProcessor(BlockProcessor):
             # list for future processing.
             blocks.insert(0, the_rest)
 
-    def get_color(self, match):
-        return match.group(6)
+    def _get_title(self, block: str) -> Optional[str]:
+        return self._get_attribute(block, 'title')
 
-    def get_icon(self, match):
-        return match.group(5)
+    def _get_color(self, block: str) -> Optional[str]:
+        return self._get_attribute(block, 'color')
 
-    def get_width_class(self, match):
-        width_class = match.group(3)
-        if width_class is None:
-            return 'col-md-12'
-        return width_class
+    def _get_icon(self, block: str) -> Optional[str]:
+        return self._get_attribute(block, 'icon')
 
-    def get_subtitle(self, match):
-        return match.group(4)
+    def _get_width_class(self, block: str):
+        width_class = self._get_attribute(block, 'width-class')
+        if width_class:
+            return width_class
+        return 'col-md-12'
 
-    def get_class_and_title(self, match):
-        klass, title = match.group(1).lower(), match.group(2)
-        klass = self.RE_SPACES.sub(' ', klass)
-        if title is None:
-            # no title was provided, use the capitalized classname as title
-            # e.g.: `!!! note` will render
-            # `<p class="admonition-title">Note</p>`
-            title = klass.split(' ', 1)[0].capitalize()
-        elif title == '':
-            # an explicit blank title should not be rendered
-            # e.g.: `!!! warning ""` will *not* render `p` with a title
-            title = None
-        return klass, title
+    def _get_subtitle(self, block: str) -> Optional[str]:
+        return self._get_attribute(block, 'subtitle')
+
+    def _get_attribute(self, block: str, attribute: str) -> Optional[str]:
+        pattern = self._get_attribute_pattern(attribute)
+        value = pattern.search(block)
+
+        if value:
+            return value.group(1)
+
+    @staticmethod
+    def _get_attribute_pattern(attribute: str) -> Pattern[AnyStr]:
+        return re.compile(rf'\[{attribute}=(.*?)]')
 
 
 def makeExtension(**kwargs):  # pragma: no cover
