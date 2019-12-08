@@ -32,6 +32,8 @@ PLUGINS = [
 # ==================================================
 MARKDOWN = {
     'extensions': [
+        'mk_card',
+        'markdown.extensions.attr_list',
         'pymdownx.emoji',
         'pymdownx.highlight',
         'pymdownx.mark',
