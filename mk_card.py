@@ -65,42 +65,45 @@ class AdmonitionProcessor(BlockProcessor):
             card = etree.SubElement(col, 'div')
             card.set('class', f'card')
 
-            card_header = etree.SubElement(card, 'div')
-            card_header.set('class', 'card-header')
-
-            if color:
-                card_header.attrib['class'] += f' card-header-{color}'
+            card_header: Optional[Element] = None
+            if title or icon:
+                card_header = etree.SubElement(card, 'div')
+                card_header.set('class', 'card-header')
 
             card_body = etree.SubElement(card, 'div')
             card_body.set('class', 'card-body')
 
-            if icon:
-                card_header.attrib['class'] += ' card-header-icon'
+            if card_header:
+                if color:
+                    card_header.attrib['class'] += f' card-header-{color}'
 
-                card_icon = etree.SubElement(card_header, 'div')
-                card_icon.set('class', 'card-icon')
+                if icon:
+                    card_header.attrib['class'] += ' card-header-icon'
 
-                card_icon_i = etree.SubElement(card_icon, 'i')
-                card_icon_i.set('class', 'material-icons')
-                card_icon_i.text = icon
+                    card_icon = etree.SubElement(card_header, 'div')
+                    card_icon.set('class', 'card-icon')
 
-                if title:
-                    card_title = etree.SubElement(card_body, 'h4')
+                    card_icon_i = etree.SubElement(card_icon, 'i')
+                    card_icon_i.set('class', 'material-icons')
+                    card_icon_i.text = icon
+
+                    if title:
+                        card_title = etree.SubElement(card_body, 'h4')
+                        card_title.set('class', 'card-title')
+                        card_title.text = title
+
+                    if subtitle:
+                        print('Subtitle is not supported in conjunction with an icon.')
+
+                else:
+                    card_title = etree.SubElement(card_header, 'h4')
                     card_title.set('class', 'card-title')
                     card_title.text = title
 
-                if subtitle:
-                    print('Subtitle is not supported in conjunction with an icon.')
-
-            else:
-                card_title = etree.SubElement(card_header, 'h4')
-                card_title.set('class', 'card-title')
-                card_title.text = title
-
-                if subtitle:
-                    card_subtitle = etree.SubElement(card_header, 'p')
-                    card_subtitle.set('class', 'category')
-                    card_subtitle.text = subtitle
+                    if subtitle:
+                        card_subtitle = etree.SubElement(card_header, 'p')
+                        card_subtitle.set('class', 'category')
+                        card_subtitle.text = subtitle
         else:
             card_body = sibling.find(".//div[@class = 'card-body']")
 
