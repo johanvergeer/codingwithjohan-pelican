@@ -29,7 +29,7 @@ class AdmonitionExtension(Extension):
 
 class AdmonitionProcessor(BlockProcessor):
 
-    CLASSNAME = 'card'
+    CLASSNAME = 'mk-card'
     CLASSNAME_TITLE = 'admonition-title'
     RE = re.compile(r'(?:^|\n)!!! ?([\w\-]+(?: +[\w\-]+)*)(?: +"(.*?)")? *(?:\n|$)')
     RE_SPACES = re.compile('  +')
@@ -42,21 +42,25 @@ class AdmonitionProcessor(BlockProcessor):
 
     def run(self, parent: Element, blocks):
         sibling = self.lastChild(parent)
-        print(type(parent))
         block = blocks.pop(0)
         m = self.RE.search(block)
 
         if m:
             block = block[m.end():]  # removes the first line
 
-        block, theRest = self.detab(block)
-        print("Block => ", block)
-        print("theRest => ", theRest)
+        block, the_rest = self.detab(block)
 
         if m:
             klass, title = self.get_class_and_title(m)
-            card = etree.SubElement(parent, 'div')
-            card.set('class', '{} {}'.format(self.CLASSNAME, klass))
+
+            row = etree.SubElement(parent, 'div')
+            row.set('class', f'row {self.CLASSNAME}')
+
+            col = etree.SubElement(row, 'div')
+            col.set('class', 'col-md-12')
+
+            card = etree.SubElement(col, 'div')
+            card.set('class', f'card {klass}')
             if title:
                 card_header = etree.SubElement(card, 'div')
                 card_header.set('class', 'card-header')
@@ -68,16 +72,15 @@ class AdmonitionProcessor(BlockProcessor):
             card_body = etree.SubElement(card, 'div')
             card_body.set('class', 'card-body')
         else:
-            card_body = sibling.find("./div[@class = 'card-body']")
-            print("card body => ", card_body)
+            card_body = sibling.find(".//div[@class = 'card-body']")
 
         self.parser.parseChunk(card_body, block)
 
-        if theRest:
+        if the_rest:
             # This block contained unindented line(s) after the first indented
             # line. Insert these lines as the first block of the master blocks
             # list for future processing.
-            blocks.insert(0, theRest)
+            blocks.insert(0, the_rest)
 
     def get_class_and_title(self, match):
         klass, title = match.group(1).lower(), match.group(2)
