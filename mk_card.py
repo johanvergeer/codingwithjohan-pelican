@@ -1,13 +1,11 @@
 """
-Admonition extension for Python-Markdown
+Card extension for Python-Markdown
 ========================================
-Adds rST-style admonitions. Inspired by [rST][] feature with the same name.
-[rST]: http://docutils.sourceforge.net/docs/ref/rst/directives.html#specific-admonitions  # noqa
-See <https://Python-Markdown.github.io/extensions/admonition>
-for documentation.
-Original code Copyright [Tiago Serafim](https://www.tiagoserafim.com/).
-All changes Copyright The Python Markdown Project
-License: [BSD](https://opensource.org/licenses/bsd-license.php)
+Adds material style cards. Base on [Material Kit][] By Creative Tim.
+[Material Kit]: https://www.creative-tim.com/product/material-kit
+Original code Copyright [Creative Tim](https://www.creative-tim.com/).
+All changes Copyright RedGyro
+License: [MIT](https://opensource.org/licenses/MIT)
 """
 from typing import Optional, AnyStr, Pattern
 from xml.etree.ElementTree import Element
@@ -18,17 +16,17 @@ from markdown.util import etree
 import re
 
 
-class AdmonitionExtension(Extension):
-    """ Admonition extension for Python-Markdown. """
+class CardExtension(Extension):
+    """ Card extension for Python-Markdown. """
 
     def extendMarkdown(self, md):
-        """ Add Admonition to Markdown instance. """
+        """ Add Card to Markdown instance. """
         md.registerExtension(self)
 
-        md.parser.blockprocessors.register(AdmonitionProcessor(md.parser), 'admonition', 105)
+        md.parser.blockprocessors.register(CardProcessor(md.parser), 'card', 105)
 
 
-class AdmonitionProcessor(BlockProcessor):
+class CardProcessor(BlockProcessor):
     CLASSNAME = 'mk-card'
     RE = re.compile(r'(?:^|\n)!!! card( *\[[a-z-]+=(.*)])*(?:\n|$)')
 
@@ -146,4 +144,4 @@ class AdmonitionProcessor(BlockProcessor):
 
 
 def makeExtension(**kwargs):  # pragma: no cover
-    return AdmonitionExtension(**kwargs)
+    return CardExtension(**kwargs)
