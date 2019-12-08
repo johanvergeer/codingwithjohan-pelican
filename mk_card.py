@@ -30,8 +30,7 @@ class AdmonitionExtension(Extension):
 class AdmonitionProcessor(BlockProcessor):
 
     CLASSNAME = 'mk-card'
-    CLASSNAME_TITLE = 'admonition-title'
-    RE = re.compile(r'(?:^|\n)!!! ?([\w\-]+(?: +[\w\-]+)*)(?: +"(.*?)")? *(?:\n|$)')
+    RE = re.compile(r'(?:^|\n)!!! ?([\w\-]+(?: +[\w\-]+)*)(?: +\[title=(.*?)\])? *(?:\n|$)')
     RE_SPACES = re.compile('  +')
 
     def test(self, parent, block):
