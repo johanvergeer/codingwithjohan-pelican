@@ -23,8 +23,7 @@ USE_FOLDER_AS_CATEGORY = True
 
 PLUGINS = [
     'pelican_gist',
-    'pelican.plugins.add_css_classes',
-    'boxes'
+    'pelican.plugins.add_css_classes'
 ]
 
 # ==================================================
