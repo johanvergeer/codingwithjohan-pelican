@@ -1,6 +1,9 @@
 {% extends '_layoutBase.html' %}
 
-{% block content %}
+{% block body %}
+<body class="profile-page sidebar-collapse">
+{% include 'includes/_nav.html' %}
+
 <div class="page-header header-filter"
     style='background-image: url("{{ SITEURL }}/theme/img/city-profile.jpg"); transform: translate3d(0px, 0px, 0px);'
     data-parallax="true">
@@ -9,8 +12,11 @@
 <div class="main main-raised">
     <div class="section section-basic">
         <div class="container">
-              {% block layout_content %}{%endblock%}
+              {% block content %}{%endblock%}
         </div>
     </div>
 </div>
+
+{% include 'includes/_footer.html' %}
+{% include 'includes/_scripts.html' %}
 {% endblock %}
