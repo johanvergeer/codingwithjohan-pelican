@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from pymdownx import emoji
 
 AUTHOR = 'Johan Vergeer'
-SITENAME = 'RedGyro.com'
+SITENAME = "I'm Johan"
 SITEURL = ''
 
 THEME = 'themes/material-kit'

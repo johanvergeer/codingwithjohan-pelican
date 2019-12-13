@@ -2,6 +2,10 @@
 {% import 'includes/_article.html' as art %}
 {% import 'includes/_tags.html' as tags %}
 
+{% block title %}
+    {{ SITENAME }} | {{ article.title }}
+{% endblock title %}
+
 {% block meta %}
     {% if article.status == 'draft' %}
         {# Don't let search engines index draft articles #}
