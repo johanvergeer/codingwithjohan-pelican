@@ -17,6 +17,10 @@ DEFAULT_LANG = 'en'
 
 USE_FOLDER_AS_CATEGORY = True
 
+DEFAULT_METADATA = {
+    'status': 'draft',
+}
+
 # ==================================================
 # Plugins
 # ==================================================
@@ -119,11 +123,10 @@ PAGINATION_PATTERNS = (
 )
 
 # ==================================================
-# JTable
+# CSS Classes
 # ==================================================
 ADD_CSS_CLASSES = {
     "table": ["table"],
-    "div.admonition.danger": ["foo"]
 }
 
 ADD_CSS_CLASSES_TO_PAGE = {
