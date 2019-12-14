@@ -10,7 +10,7 @@ import sys
 
 sys.path.append(os.curdir)
 
-from pelicanconf import *
+from pelicanconf import *  # noqa
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
 SITEURL = ''
