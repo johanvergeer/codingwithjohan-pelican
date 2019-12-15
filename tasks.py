@@ -9,6 +9,8 @@ from invoke import task
 from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
 from pelican.settings import DEFAULT_CONFIG, get_settings_from_file
 
+from netlify_client import NetlifyClient
+
 SETTINGS_FILE_BASE = 'pelicanconf.py'
 SETTINGS = {}
 SETTINGS.update(DEFAULT_CONFIG)
@@ -111,22 +113,12 @@ def livereload(c):
     server.serve(port=CONFIG['port'], root=CONFIG['deploy_path'])
 
 
-@task
-def publish(c):
-    """Publish to production via rsync"""
-    c.run('pelican -s {settings_publish}'.format(**CONFIG))
-    c.run(
-        'rsync --delete --exclude ".DS_Store" -pthrvz -c '
-        '-e "ssh -p {ssh_port}" '
-        '{} {ssh_user}@{ssh_host}:{ssh_path}'.format(
-            CONFIG['deploy_path'].rstrip('/') + '/',
-            **CONFIG))
-
-
-@task
-def gh_pages(c):
-    """Publish to GitHub Pages"""
-    preview(c)
-    c.run('ghp-import -b {github_pages_branch} '
-          '-m {commit_message} '
-          '{deploy_path} -p'.format(**CONFIG))
+@task(help={
+    "site-id": "Name of your site in Netlify.",
+    "token": "Your Netlify api access token. See https://docs.netlify.com/cli/get-started/#obtain-a-token-via-the-command-line",
+    "build-dir": "The folder you want to deploy"
+})
+def publish(c, site_id, token, build_dir):
+    """Publish to Netlify"""
+    client = NetlifyClient(site_id, token)
+    client.deploy(build_dir)
