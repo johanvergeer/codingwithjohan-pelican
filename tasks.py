@@ -118,7 +118,7 @@ def livereload(c):
     "token": "Your Netlify api access token. See https://docs.netlify.com/cli/get-started/#obtain-a-token-via-the-command-line",
     "build-dir": "The folder you want to deploy"
 })
-def publish(c, site_id, token, build_dir):
-    """Publish to Netlify"""
+def deploy(c, site_id, token, build_dir):
+    """Deploy to Netlify"""
     client = NetlifyClient(site_id, token)
     client.deploy(build_dir)
