@@ -49,7 +49,12 @@ module.exports = {
                             outputPath: "fonts/",
                             publicPath: "fonts/"
                         }
-                    }
+                    },
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                        },
+                    },
                 ]
             },
             {
