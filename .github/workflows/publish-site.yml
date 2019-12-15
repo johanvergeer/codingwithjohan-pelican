@@ -32,5 +32,4 @@ jobs:
     - name: Build Pelican site
       run: poetry run invoke preview
     - name: Deploy to Netlify
-      uses: wei/curl@master
       run: poetry run invoke deploy -b output -s redgyro -t ${{ secrets.NETLIFY_API_ACCESS_TOKEN }}
