@@ -23,7 +23,6 @@ jobs:
     - name: Setup Python environment
       uses: actions/setup-python@v1.1.1
       with:
-        # Version range or exact version of a Python version to use, using semvers version range syntax.
         python-version: 3.7
     - name: Install Poetry
       uses: dschep/install-poetry-action@v1.2

@@ -1,35 +1,69 @@
 {% import 'includes/_tags.html' as tags %}
 
 {% macro author_published_category(article) %}
-    <a href="{{ SITEURL }}/{{ article.author.url }}" class="mr-3"><i class="fa fa-user"></i> {{article.author}}</a>
-    <span><i class="fa fa-calendar"></i> <time>{{article.locale_date}}</time></span>
+    <a href="{{ SITEURL }}/{{ article.author.url }}" class="mr-3"><i class="fa fa-user"></i> {{ article.author }}</a>
+    <span><i class="fa fa-calendar"></i> <time>{{ article.locale_date }}</time></span>
     <a href="{{ SITEURL }}/{{ article.category.url }}"><i class="ml-3 fa fa-th-large"></i> {{ article.category }}</a>
 {% endmacro %}
 
-{% macro article_excerpt(article) %}
-<div class="card mb-5">
-    <div class="card-header card-header-primary">
-        {{ article.title }}
-    </div>
-    <div class="card-body">
-            {{ article.summary }}
-        <a href="{{ SITEURL }}/{{ article.url }}">Keep reading <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>
-    </div>
-    <div class="card-footer">
-        <div class="container-fluid">
-            <div class="d-flex flex-row-reverse">
-                <div class="p-1">
-                    {{ author_published_category(article) }}
+{% macro article_excerpt(article, read_more="Read More") %}
+
+    <div class="card card-blog mb-5">
+        <div class="card-header card-header-image">
+            <a href="#pablo">
+                <img class="img"
+                     src="https://images.unsplash.com/photo-1511439817358-bee8e21790b5?auto=format&fit=crop&w=750&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
+                <div class="card-title">
+                    {{ article.title }}
                 </div>
-            </div>
-            <div class="d-flex flex-row-reverse">
-                <div class="p-1">
-                    {{ tags.all_tags_for_article(article) }}
+            </a>
+        </div>
+        <div class="card-body">
+            <h6 class="card-category text-info">{{ article.category }}</h6>
+            <p class="card-description">
+                {{ article.summary }}
+            </p>
+            <div class="card-stats">
+                <div class="author">
+                    <a href="{{ SITEURL }}/{{ article.author.url }}">
+                        {#                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=334&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"#}
+                        {#                             alt="..." class="avatar img-raised">#}
+                        <span>{{ article.author.name }}</span>
+                    </a>
+                </div>
+                <div class="stats ml-auto">
+                        <time>{{ article.locale_date }}</time>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    {#<div class="card mb-5">#}
+    {#    <div class="card-header card-header-primary">#}
+    {#        {{ article.title }}#}
+    {#    </div>#}
+    {#    <div class="card-body">#}
+    {#            {{ article.summary }}#}
+    {#        <a href="{{ SITEURL }}/{{ article.url }}">#}
+    {#            {{ read_more }}#}
+    {#            <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i>#}
+    {#        </a>#}
+    {#    </div>#}
+    {#    <div class="card-footer">#}
+    {#        <div class="container-fluid">#}
+    {#            <div class="d-flex flex-row-reverse">#}
+    {#                <div class="p-1">#}
+    {#                    {{ author_published_category(article) }}#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="d-flex flex-row-reverse">#}
+    {#                <div class="p-1">#}
+    {#                    {{ tags.all_tags_for_article(article) }}#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#</div>#}
 
 {% endmacro %}
 
