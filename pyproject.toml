@@ -15,6 +15,7 @@ pelican-add-css-classes = "^1.0"
 docutils-stubs = "^0.0.21"
 pymdown-extensions = "^6.2"
 ghp-import = "^0.5.5"
+requests = "^2.22"
 
 [tool.poetry.dev-dependencies]
 
