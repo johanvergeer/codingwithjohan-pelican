@@ -29,5 +29,7 @@ jobs:
       uses: dschep/install-poetry-action@v1.2
     - name: Install Python dependencies
       run: poetry install
+    - name: Build Pelican site
+      run: poetry run invoke preview
       
       
