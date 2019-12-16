@@ -1,1 +1,1 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/6a9b2d01-4ac9-457a-8b8f-1ec30de34dc5/deploy-status)](https://app.netlify.com/sites/redgyro/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6a9b2d01-4ac9-457a-8b8f-1ec30de34dc5/deploy-status)](https://app.netlify.com/sites/codingwithjohan/deploys)

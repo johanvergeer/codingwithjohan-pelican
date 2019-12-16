@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "redgyro-blog"
+name = "coding-with-johan-blog"
 version = "0.1.0"
-description = "The RedGyro.com blog"
+description = "Coding With Johan Blog"
 authors = ["Johan Vergeer <johanvergeer@gmail.com>"]
 
 [tool.poetry.dependencies]

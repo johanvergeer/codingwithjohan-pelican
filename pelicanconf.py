@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from pymdownx import emoji
 
 AUTHOR = 'Johan Vergeer'
-SITENAME = "RedGyro.com"
+SITENAME = "Coding With Johan"
 CATCHPHRASE = "Doing what I like, and liking what I do"
 READMORE = "Read more"
 
