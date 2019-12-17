@@ -23,3 +23,8 @@ SOCIAL = (('linkedin', 'https://www.linkedin.com/in/me', 'Join my network'),
 > ARTICLES_ON_HOMEPAGE
 
 Sets the maximum number of articles that will be shown on the homepage
+
+> HOMEPAGE_BANNER
+
+Image for the homepage banner. Be aware that the directory of this file must be in `STATIC_PATHS`.
+A grey area is displayed when the image is not found.
