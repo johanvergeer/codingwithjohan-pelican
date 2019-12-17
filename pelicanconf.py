@@ -20,7 +20,7 @@ DEFAULT_LANG = 'en'
 USE_FOLDER_AS_CATEGORY = True
 
 DEFAULT_METADATA = {
-    # 'status': 'draft',
+    'status': 'draft',
 }
 
 # ==================================================
@@ -36,6 +36,8 @@ STATIC_PATHS = ["img"]
 CATCHPHRASE = "Doing what I like, and liking what I do"
 # Name of the homepage banner image
 HOMEPAGE_BANNER = "/img/passion-led-us-here-2.jpg"
+# Name of the favicon image
+FAVICON = "/img/favicon-32.png"
 # Value of the "Read More" button on each post excerpt
 READMORE = "Read more"
 

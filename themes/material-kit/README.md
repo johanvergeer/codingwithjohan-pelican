@@ -26,5 +26,13 @@ Sets the maximum number of articles that will be shown on the homepage
 
 > HOMEPAGE_BANNER
 
-Image for the homepage banner. Be aware that the directory of this file must be in `STATIC_PATHS`.
+Image for the homepage banner. 
+Be aware that the directory of this file must be in `STATIC_PATHS`.
 A grey area is displayed when the image is not found.
+
+
+> FAVICON
+
+Path to the favicon icon. This should be a 32x32 png image. 
+Be aware that the directory of this file must be in `STATIC_PATHS`.
+A default favicon is displayed when the image is not found.
