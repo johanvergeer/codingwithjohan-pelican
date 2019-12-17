@@ -5,7 +5,7 @@
 {% include 'includes/_nav.html' %}
 
 <div class="page-header header-filter"
-    style='background-image: url("{{ SITEURL }}/theme/img/city-profile.jpg"); transform: translate3d(0px, 0px, 0px);'
+    style='background-image: url("{{ SITEURL }}{% if article %}{{ article.banner_image }}{% else %}{{ page.banner_image }}{% endif %}"); transform: translate3d(0px, 0px, 0px);'
     data-parallax="true">
 </div>
 

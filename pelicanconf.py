@@ -21,6 +21,8 @@ USE_FOLDER_AS_CATEGORY = True
 
 DEFAULT_METADATA = {
     'status': 'draft',
+    'excerpt_image': '/img/1_500px.jpg',
+    'banner_image': '/img/1_1000px.jpg'
 }
 
 # ==================================================
@@ -38,8 +40,17 @@ CATCHPHRASE = "Doing what I like, and liking what I do"
 HOMEPAGE_BANNER = "/img/passion-led-us-here-2.jpg"
 # Name of the favicon image
 FAVICON = "/img/favicon-32.png"
+
+# Articles
+# ========
 # Value of the "Read More" button on each post excerpt
-READMORE = "Read more"
+READ_MORE = "Read more"
+
+# The default image displayed on the articles list
+DEFAULT_ARTICLE_EXCERPT_IMAGE = "/img/1_500px.jpg"
+
+# The default image displayed on the article page
+DEFAULT_ARTICLE_PAGE_IMAGE = ""
 
 # ==================================================
 # Plugins
