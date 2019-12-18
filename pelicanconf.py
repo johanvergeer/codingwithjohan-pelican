@@ -58,7 +58,8 @@ DEFAULT_ARTICLE_PAGE_IMAGE = ""
 
 PLUGINS = [
     'pelican_gist',
-    'pelican.plugins.add_css_classes'
+    'pelican.plugins.add_css_classes',
+    'pelican.plugins.series',
 ]
 
 # ==================================================
