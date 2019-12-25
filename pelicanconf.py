@@ -59,7 +59,9 @@ DEFAULT_ARTICLE_PAGE_IMAGE = ""
 PLUGINS = [
     'pelican_gist',
     'pelican.plugins.add_css_classes',
+    'pelican.plugins.timegraphics',
     'pelican.plugins.series',
+    'pelican.plugins.simple_footnotes'
 ]
 
 # ==================================================
@@ -74,6 +76,9 @@ MARKDOWN = {
         'pymdownx.mark',
         'pymdownx.progressbar',
         'pymdownx.superfences',
+        'footnotes',
+        'toc',
+        'markdown.extensions.comments'
     ],
     'extension_configs': {
         "pymdownx.emoji": {
