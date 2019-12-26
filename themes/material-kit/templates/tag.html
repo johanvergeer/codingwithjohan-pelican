@@ -3,20 +3,26 @@
 {% import 'includes/_article.html' as article %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-8">
-            <div class="title mb-5">
-                <h1>Articles about {{ tag.name }}</h1>
-            </div>
+    <div class="main main-raised">
+        <div class="section section-basic">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="title mb-5">
+                            <h1>Articles about {{ tag.name }}</h1>
+                        </div>
 
-            {% for a in articles_page.object_list %}
-                {{ article.article_excerpt(a) }}
-            {% endfor %}
+                        {% for a in articles_page.object_list %}
+                            {{ article.article_excerpt(a) }}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if articles_page.has_other_pages() and PAGINATED_TEMPLATES['tag'] %}
+                    <div class="row">
+                        {% include 'includes/_pagination.html' %}
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
-    {% if articles_page.has_other_pages() and PAGINATED_TEMPLATES['tag'] %}
-        <div class="row">
-            {% include 'includes/_pagination.html' %}
-        </div>
-    {% endif %}
 {% endblock %}

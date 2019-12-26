@@ -14,40 +14,46 @@
 {% endblock meta %}
 
 {% block content %}
+    <div class="main main-article">
+        <div class="section section-basic">
+            <div class="container">
+                {% if article.status == 'draft' %}
+                    <div class="card bg-danger">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <i class="fa fa-exclamation-circle"></i> You are looking at a draft version of this
+                                post.
+                            </h4>
+                        </div>
+                    </div>
+                {% endif %}
 
-    {% if article.status == 'draft' %}
-        <div class="card bg-danger">
-            <div class="card-body">
-                <h4 class="card-title">
-                    <i class="fa fa-exclamation-circle"></i> You are looking at a draft version of this post.
-                </h4>
+                <div class="title">
+                    <h1>{{ article.title }}</h1>
+                </div>
+
+                <div class="row mb-1">
+                    <div class="col">
+                        {{ art.author_published_category(article) }}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col">
+                        {{ tags.all_tags_for_article(article) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a href="{{ SITEURL }}/pages/blog/">
+                            Back To posts <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <hr>
+
+                {{ article.content }}
             </div>
         </div>
-    {% endif %}
-
-    <div class="title">
-        <h1>{{ article.title }}</h1>
     </div>
-
-    <div class="row mb-1">
-        <div class="col">
-            {{ art.author_published_category(article) }}
-        </div>
-    </div>
-    <div class="row mb-1">
-        <div class="col">
-            {{ tags.all_tags_for_article(article) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <a href="{{ SITEURL }}/pages/blog/">
-                Back To posts <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-    </div>
-
-    <hr>
-
-    {{ article.content }}
 {% endblock %}

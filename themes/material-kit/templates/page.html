@@ -1,5 +1,11 @@
 {% extends '_layout.html' %}
 
 {% block content %}
-{{page.content}}
-{%endblock%}
+    <div class="main main-raised">
+        <div class="section section-basic">
+            <div class="container">
+                {{ page.content }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
