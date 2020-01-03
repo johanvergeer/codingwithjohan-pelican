@@ -95,13 +95,15 @@ def livereload(c):
     # Watch the base settings file
     server.watch(CONFIG['settings_base'], lambda: build(c))
     # Watch content source files
-    content_file_extensions = ['.md', '.rst']
+    content_file_extensions = ['.md', '.rst', '.bib']
     for extension in content_file_extensions:
         content_blob = f'{SETTINGS["PATH"]}/**/*{extension}'
         server.watch(content_blob, lambda: build(c))
+        content_blob = f'{SETTINGS["PATH"]}/*{extension}'
+        server.watch(content_blob, lambda: build(c))
+
     # Watch the theme's templates and static assets
     theme_path = SETTINGS['THEME']
-
     server.watch(f'{theme_path}/templates/**/*.html', lambda: build(c))
     server.watch(f'{theme_path}/templates/*.html', lambda: build(c))
     static_file_extensions = ['.css', '.js']
