@@ -58,10 +58,10 @@ DEFAULT_ARTICLE_PAGE_IMAGE = ""
 
 PLUGINS = [
     'pelican_gist',
+    'pelican_cite',
     'pelican.plugins.add_css_classes',
     'pelican.plugins.timegraphics',
     'pelican.plugins.series',
-    'pelican.plugins.simple_footnotes'
 ]
 
 # ==================================================
@@ -175,3 +175,10 @@ ADD_CSS_CLASSES_TO_PAGE = {
 ADD_CSS_CLASSES_TO_ARTICLE = {
     "blockquote": ["blockquote"],
 }
+
+# ==================================================
+# Citations
+# ==================================================
+PUBLICATIONS_SRC = "content/pubs.bib"
+BIBLIOGRAPHY_LABEL_STYLE = "author_year_1"
+BIBLIOGRAPHY_NAME_STYLE = "plain"

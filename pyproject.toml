@@ -18,8 +18,10 @@ pymdown-extensions = "^6.2"
 requests = "^2.22"
 pelican-series-plugin = "0.0.1"
 pelican-timegraphics-plugin = "^1.0.0"
-pelican-simple-footnotes = "^1.0.0"
 markdown-comments = "^1.0.0"
+pelican-cite = "^1.0.0"
+pybtex-author-year-label = "^1.0.0"
+
 [tool.poetry.dev-dependencies]
 
 [build-system]
