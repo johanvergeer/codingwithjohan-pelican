@@ -78,7 +78,7 @@ MARKDOWN = {
         'pymdownx.superfences',
         'footnotes',
         'toc',
-        'markdown.extensions.comments'
+        'python_markdown_comments'
     ],
     'extension_configs': {
         "pymdownx.emoji": {
