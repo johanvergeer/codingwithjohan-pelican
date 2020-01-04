@@ -1,0 +1,34 @@
+name: Publish site
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '13.x'
+    - name: Install npm dependencies
+      run: cd themes/material-kit && npm i
+    - name: Webpack build
+      run: cd themes/material-kit && npm run build 
+    - name: Setup Python environment
+      uses: actions/setup-python@v1.1.1
+      with:
+        python-version: 3.7
+    - name: Install Poetry
+      uses: dschep/install-poetry-action@v1.2
+    - name: Install Python dependencies
+      run: poetry install
+    - name: Build Pelican site
+      run: poetry run invoke preview
+    - name: Deploy to Netlify
+      run: poetry run invoke deploy -b output -s codingwithjohan -t ${{ secrets.NETLIFY_API_ACCESS_TOKEN }}

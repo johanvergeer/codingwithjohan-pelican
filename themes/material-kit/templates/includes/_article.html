@@ -1,0 +1,82 @@
+{% import 'includes/_tags.html' as tags %}
+
+{% macro author_published_category(article) %}
+    <a href="{{ SITEURL }}/{{ article.author.url }}" class="mr-3"><i class="fa fa-user"></i> {{ article.author }}</a>
+    <span><i class="fa fa-calendar"></i> <time>{{ article.locale_date }}</time></span>
+    <a href="{{ SITEURL }}/{{ article.category.url }}"><i class="ml-3 fa fa-th-large"></i> {{ article.category }}</a>
+{% endmacro %}
+
+{% macro article_excerpt(article, read_more="Read More") %}
+
+    <div class="card card-blog mb-5">
+        <div class="card-header card-header-image">
+            <a href="{{ SITEURL }}/{{ article.url }}">
+                <img class="img" src="{{ article.excerpt_image }}">
+                <div class="card-title">
+                    {{ article.title }}
+                </div>
+            </a>
+        </div>
+        <div class="card-body">
+            <h6 class="card-category text-info">{{ article.category }}</h6>
+            <p class="card-description">
+                {{ article.summary }}
+            </p>
+            <div class="card-stats">
+                <div class="author">
+                    <a href="{{ SITEURL }}/{{ article.author.url }}">
+                        <span>{{ article.author.name }}</span>
+                    </a>
+                </div>
+                <div class="stats ml-auto">
+                    <time>{{ article.locale_date }}</time>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}
+
+{% macro article_series(article) %}
+    {% if article.series %}
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <em>This is part {{ article.series.index }} of the {{ article.series.name }} series</em>
+                </p>
+            </div>
+            {% if article.series.index == 1 %}
+                <div class="col-sm-12">
+                    <ol class="parts">
+                        {% for part_article in article.series.all %}
+                            <li {% if part_article == article %}class="active"{% endif %}>
+                                <a href='{{ SITEURL }}/{{ part_article.url }}'>{{ part_article.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            {% endif %}
+            <div class="col-sm-12">
+                {% if article.series.previous %}
+                    <div class="pull-left">
+                        <a href="{{ SITEURL }}/{{ article.series.previous.url }}">
+                            <i class="fas fa-chevron-left"></i><i class="fas fa-chevron-left"></i>
+                            {{ article.series.previous.title }}
+                        </a>
+                    </div>
+                {% endif %}
+                {% if article.series.next %}
+                    <div class="pull-right">
+                        <a href="{{ SITEURL }}/{{ article.series.next.url }}">
+                            {{ article.series.next.title }}
+                            <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+

@@ -1,0 +1,23 @@
+{% extends '_layout.html' %}
+{% import '_macros.html' as macros %}
+{% import 'includes/_article.html' as article %}
+
+{% block content %}
+    <div class="main main-raised">
+        <div class="section section-basic">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="title mb-5">
+                            <h1>Blog posts</h1>
+                        </div>
+
+                        {% for a in dates %}
+                            {{ article.article_excerpt(a) }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
