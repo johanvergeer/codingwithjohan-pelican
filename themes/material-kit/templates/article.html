@@ -42,17 +42,12 @@
                         {{ tags.all_tags_for_article(article) }}
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <a href="{{ SITEURL }}/pages/blog/">
-                            Back To posts <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i>
-                        </a>
-                    </div>
-                </div>
+
+                {{ art.article_series(article) }}
 
                 <hr>
-
                 {{ article.content }}
+
             </div>
         </div>
     </div>

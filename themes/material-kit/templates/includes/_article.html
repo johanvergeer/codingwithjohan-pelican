@@ -25,45 +25,58 @@
             <div class="card-stats">
                 <div class="author">
                     <a href="{{ SITEURL }}/{{ article.author.url }}">
-                        {#                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=334&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"#}
-                        {#                             alt="..." class="avatar img-raised">#}
                         <span>{{ article.author.name }}</span>
                     </a>
                 </div>
                 <div class="stats ml-auto">
-                        <time>{{ article.locale_date }}</time>
+                    <time>{{ article.locale_date }}</time>
                 </div>
             </div>
         </div>
     </div>
 
-    {#<div class="card mb-5">#}
-    {#    <div class="card-header card-header-primary">#}
-    {#        {{ article.title }}#}
-    {#    </div>#}
-    {#    <div class="card-body">#}
-    {#            {{ article.summary }}#}
-    {#        <a href="{{ SITEURL }}/{{ article.url }}">#}
-    {#            {{ read_more }}#}
-    {#            <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i>#}
-    {#        </a>#}
-    {#    </div>#}
-    {#    <div class="card-footer">#}
-    {#        <div class="container-fluid">#}
-    {#            <div class="d-flex flex-row-reverse">#}
-    {#                <div class="p-1">#}
-    {#                    {{ author_published_category(article) }}#}
-    {#                </div>#}
-    {#            </div>#}
-    {#            <div class="d-flex flex-row-reverse">#}
-    {#                <div class="p-1">#}
-    {#                    {{ tags.all_tags_for_article(article) }}#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    </div>#}
-    {#</div>#}
+{% endmacro %}
 
+{% macro article_series(article) %}
+    {% if article.series %}
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <em>This is part {{ article.series.index }} of the {{ article.series.name }} series</em>
+                </p>
+            </div>
+            {% if article.series.index == 1 %}
+                <div class="col-sm-12">
+                    <ol class="parts">
+                        {% for part_article in article.series.all %}
+                            <li {% if part_article == article %}class="active"{% endif %}>
+                                <a href='{{ SITEURL }}/{{ part_article.url }}'>{{ part_article.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            {% endif %}
+            <div class="col-sm-12">
+                {% if article.series.previous %}
+                    <div class="pull-left">
+                        <a href="{{ SITEURL }}/{{ article.series.previous.url }}">
+                            <i class="fas fa-chevron-left"></i><i class="fas fa-chevron-left"></i>
+                            {{ article.series.previous.title }}
+                        </a>
+                    </div>
+                {% endif %}
+                {% if article.series.next %}
+                    <div class="pull-right">
+                        <a href="{{ SITEURL }}/{{ article.series.next.url }}">
+                            {{ article.series.next.title }}
+                            <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
 {% endmacro %}
 
 
