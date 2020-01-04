@@ -1,8 +1,0 @@
-.main-article {
-  @extend .main-raised;
-
-  @media all and (min-width: 767px) {
-    width: 747px;
-    margin: -60px auto 0;
-  }
-}
