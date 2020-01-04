@@ -48,6 +48,10 @@
                 <hr>
                 {{ article.content }}
 
+                {% if article.bibliography %}
+                    {{ article.bibliography.rendered }}
+                {% endif %}
+
             </div>
         </div>
     </div>
