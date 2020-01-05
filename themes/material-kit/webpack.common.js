@@ -5,7 +5,8 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         'main': './src/index.js',
-        'article': './src/js/article.js'
+        'index': './src/js/pages/index.js',
+        'article': './src/js/pages/article.js'
     },
     output: {
         filename: "js/[name].bundle.js?[hash]",

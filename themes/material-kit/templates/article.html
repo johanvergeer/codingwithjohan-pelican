@@ -13,8 +13,9 @@
     {% endif %}
 {% endblock meta %}
 
+{% block body_class %}blog-post sidebar-collapse{% endblock %}
+
 {% block content %}
-    <body class="blog-post sidebar-collapse">
     <div class="page-header header-filter"
          data-parallax="true"
             {# //@formatter:off #}
@@ -129,7 +130,6 @@
             </div>
         </div>
     </div>
-    </body>
 {% endblock %}
 
 {% block scripts %}

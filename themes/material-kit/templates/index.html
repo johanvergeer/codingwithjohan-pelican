@@ -3,8 +3,8 @@
 {% import 'includes/_article.html' as article %}
 {% import 'includes/_tags.html' as tag %}
 
+{% block body_class %}blog-posts sidebar-collapse{% endblock %}
 {% block content %}
-    <body class="blog-posts sidebar-collapse">
     {% include 'includes/_nav.html' %}
 
     <div class="page-header header-filter"
@@ -15,96 +15,40 @@
                 <div class="col-md-6">
                     <h1 class="title">{{ SITENAME }}</h1>
                     <h4>{{ CATCHPHRASE }}</h4>
+                    <br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-rose btn-round btn-lg" id="btnScrollToArticles">
+                        <i class="material-icons">format_align_left</i> Read Latest Articles
+                    </button>
                 </div>
             </div>
         </div>
     </div>
     <div class="main main-raised">
         <div class="container">
-            <div class="section">
+            <div class="section" id="articles">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="card card-raised card-background"
-                             style="background-image: url('../assets/img/examples/office2.jpg')">
-                            <div class="card-body">
-                                <h6 class="card-category text-info">Worlds</h6>
-                                <a href="#pablo">
-                                    <h3 class="card-title">The Best Productivity Apps on Market</h3>
-                                </a>
-                                <p class="card-description">
-                                    Don't be scared of the truth because we need to restart the human foundation in
-                                    truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the
-                                    back is...
-                                </p>
-                                <a href="#pablo" class="btn btn-danger btn-round">
-                                    <i class="material-icons">format_align_left</i> Read Article
-                                </a>
-                            </div>
-                        </div>
+                    <div class="col-md-12 text-center">
+                        <h2 class="title">Latest Articles</h2>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card card-raised card-background"
-                             style="background-image: url('../assets/img/examples/blog8.jpg')">
-                            <div class="card-body">
-                                <h6 class="card-category text-info">Business</h6>
-                                <h3 class="card-title">Working on Wallstreet is Not So Easy</h3>
-                                <p class="card-description">
-                                    Don't be scared of the truth because we need to restart the human foundation in
-                                    truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the
-                                    back is...
-                                </p>
-                                <a href="#pablo" class="btn btn-primary btn-round">
-                                    <i class="material-icons">format_align_left</i> Read Article
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                <div class="row">
+                    {% for a in articles_page.object_list %}
+                        {{ article.article_excerpt(a) }}
+                        {% if loop.index == ARTICLES_ON_HOMEPAGE %}
+                            {% break %}
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-    <div class="main main-raised">
-        <div class="section section-basic">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="title mb-5">
-                            <h1>Latest posts</h1>
-                        </div>
-                        {% for a in articles_page.object_list %}
-                            {{ article.article_excerpt(a) }}
-                            {% if loop.index == ARTICLES_ON_HOMEPAGE %}
-                                {% break %}
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-
-                    <div class="col-md-4">
-                        <h2>Categories</h2>
-                        <div>
-                            {% for c, _ in categories %}
-                                {{ tag.tag_as_pill(c) }}
-                            {% endfor %}
-                        </div>
-                        <hr/>
-                        <h2>Tags</h2>
-                        <div>
-                            {% for t, _ in tags %}
-                                {{ tag.tag_as_pill(t) }}
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                {% if articles_page.has_other_pages() %}
-                    <div class="row">
-                        {% include 'includes/_pagination.html' %}
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    {% include 'includes/_footer.html' %}
-    {% include 'includes/_scripts.html' %}
-    </body>
 {% endblock %}
 
+{% block scripts %}
+    <script src="{{ SITEURL }}/theme/js/index.bundle.js" type="text/javascript"></script>
+{% endblock %}

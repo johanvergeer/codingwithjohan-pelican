@@ -29,6 +29,8 @@
         {#  The place to put stylesheets for a specific page  #}
     {% endblock %}
 </head>
+
+<body class="{% block body_class %}{% endblock %}">
 {% include 'includes/_nav.html' %}
 
 {% block content %}{% endblock %}
@@ -40,4 +42,5 @@
 {% block scripts %}
     {# The place to load scripts for a specific page #}
 {% endblock %}
+</body>
 </html>
