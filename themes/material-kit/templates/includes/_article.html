@@ -1,6 +1,7 @@
 {% import 'includes/_tags.html' as tags %}
 
 {% macro author_published_category(article) %}
+    <img src="{{ SITEURL }}{{ article.author_image }}" alt="author">
     <a href="{{ SITEURL }}/{{ article.author.url }}" class="mr-3"><i class="fa fa-user"></i> {{ article.author }}</a>
     <span><i class="fa fa-calendar"></i> <time>{{ article.locale_date }}</time></span>
     <a href="{{ SITEURL }}/{{ article.category.url }}"><i class="ml-3 fa fa-th-large"></i> {{ article.category }}</a>

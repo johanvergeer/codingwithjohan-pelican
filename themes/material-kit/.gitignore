@@ -210,4 +210,8 @@ fabric.properties
 
 static/css/*.css
 static/fonts/*
+!static/fonts/README.md
 static/js/*.js
+static/img/*
+!static/img/README.md
+

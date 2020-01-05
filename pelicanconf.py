@@ -2,9 +2,15 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+from os import listdir
+from os.path import isfile, join
+
+import yaml
 from pymdownx import emoji
 
 AUTHOR = "Johan Vergeer"
+AUTHOR_IMAGE = "/img/johan_96px.png"
+
 SITENAME = "Coding With Johan"
 
 SITEURL = ''
@@ -20,9 +26,14 @@ DEFAULT_LANG = 'en'
 USE_FOLDER_AS_CATEGORY = True
 
 DEFAULT_METADATA = {
-    'status': 'draft',
-    'excerpt_image': '/img/1_500px.jpg',
-    'banner_image': '/img/1_1000px.jpg'
+    "status": "draft",
+    "excerpt_image": "/img/1_500px.jpg",
+    "banner_image": "/img/1_1000px.jpg",
+    "author_image": "/img/johan_96px.png",
+    "author_short_description": "I've been developing software for five years now, "
+                                "and I still do it with a lot of passion.",
+    "author_linkedin_username": "johanvergeer",
+    "author_github_profile": "johanvergeer"
 }
 
 # ==================================================
@@ -111,8 +122,10 @@ AUTHOR_FEED_RSS = None
 # ==================================================
 JINJA_ENVIRONMENT = {
     'extensions': [
-        'jinja2.ext.loopcontrols'
-    ]
+        'jinja2.ext.loopcontrols',
+    ],
+    'trim_blocks': True,
+    'lstrip_blocks': True
 }
 
 # ==================================================
@@ -174,6 +187,7 @@ ADD_CSS_CLASSES_TO_PAGE = {
 
 ADD_CSS_CLASSES_TO_ARTICLE = {
     "blockquote": ["blockquote"],
+    "h3": ["title"]
 }
 
 # ==================================================

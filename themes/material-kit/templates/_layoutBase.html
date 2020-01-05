@@ -50,6 +50,30 @@
           crossorigin="anonymous">
 
     <link href="{{ SITEURL }}/theme/css/main.css" rel="stylesheet"/>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDesG4klrm6cmx26E3JdyKo2BIOXXiOtBE",
+            authDomain: "codingwithjohan-a7525.firebaseapp.com",
+            databaseURL: "https://codingwithjohan-a7525.firebaseio.com",
+            projectId: "codingwithjohan-a7525",
+            storageBucket: "codingwithjohan-a7525.appspot.com",
+            messagingSenderId: "298912351866",
+            appId: "1:298912351866:web:f3612f1e5cb03b22f31dc3",
+            measurementId: "G-9SS0L8598N"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
 </head>
 {% block body %}
 

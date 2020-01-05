@@ -14,6 +14,16 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            },
+            {
                 test: /\.scss$/,
                 use: [
                     {
@@ -52,11 +62,27 @@ module.exports = {
                     },
                     {
                         loader: 'image-webpack-loader',
-                        options: {
-                        },
+                        options: {},
                     },
                 ]
             },
+            {
+                test: /\.(gif|png|jpe?g|svg|cur)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: "[name].[ext]",
+                            outputPath: "img/",
+                            publicPath: "img/"
+                        }
+                    },
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {}
+                    }
+                ]
+            }, // inline base64 URLs for <=30k images, direct URLs for the rest
             {
                 // Exposes jQuery for use outside Webpack build
                 test: require.resolve('jquery'),

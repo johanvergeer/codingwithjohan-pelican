@@ -1,0 +1,1 @@
+Don't put images in this directory, because files will be created by Webpack.
