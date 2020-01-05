@@ -1,6 +1,8 @@
 ---
 Title: What is the Guid in .NET?
 Tags: .NET
+status: draft
+excerpt: This is the summary for a post
 ---
 
 After having done some online reseach I found that a Guid in .NET is probably a UUID version 4. Let's put that to the test.

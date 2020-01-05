@@ -1,45 +1,45 @@
 <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100"
      id="sectionsNav">
-    <div class="container">
-        <div class="navbar-translate">
-            <a class="navbar-brand" href="/">
-                {{ SITENAME }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-                <span class="navbar-toggler-icon"></span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                {% for title, link in MENUITEMS %}
-                    <li><a href="{{ link }}">{{ title }}</a></li>
-                {% endfor %}
-                {% if DISPLAY_PAGES_ON_MENU %}
-                    {% for p in pages %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ SITEURL }}/{{ p.url }}">
-                                {% if p.fontawesome %}
-                                    <i class="fa fa-{{ p.fontawesome }}"></i>
-                                {% endif %}
-                                {{ p.title }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                {% endif %}
-                {% for name, link, title in SOCIAL %}
-                    <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
-                           href="{{ link }}" target="_blank"
-                           data-original-title="{{ title }}">
-                            <i class="fab fa-{{ name }} fa-2x"></i>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+  <div class="container">
+    <div class="navbar-translate">
+      <a class="navbar-brand" href="/">
+        {{ SITENAME }}
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        {% for title, link in MENUITEMS %}
+          <li><a href="{{ link }}">{{ title }}</a></li>
+        {% endfor %}
+        {% if DISPLAY_PAGES_ON_MENU %}
+          {% for p in pages %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ SITEURL }}/{{ p.url }}">
+                {% if p.fontawesome %}
+                  <i class="fa fa-{{ p.fontawesome }}"></i>
+                {% endif %}
+                {{ p.title }}
+              </a>
+            </li>
+          {% endfor %}
+        {% endif %}
+        {% for name, link, title in SOCIAL %}
+          <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+               href="{{ link }}" target="_blank"
+               data-original-title="{{ title }}">
+              <i class="fab fa-{{ name }} fa-2x"></i>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 </nav>

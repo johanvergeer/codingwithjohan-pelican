@@ -3,135 +3,135 @@
 {% import 'includes/_tags.html' as tags %}
 
 {% block title %}
-    {{ SITENAME }} | {{ article.title }}
+  {{ SITENAME }} | {{ article.title }}
 {% endblock title %}
 
 {% block meta %}
-    {% if article.status == 'draft' %}
-        {# Don't let search engines index draft articles #}
-        <meta name="robots" content="noindex">
-    {% endif %}
+  {% if article.status == 'draft' %}
+    {# Don't let search engines index draft articles #}
+    <meta name="robots" content="noindex">
+  {% endif %}
 {% endblock meta %}
 
 {% block body_class %}blog-post sidebar-collapse{% endblock %}
 
 {% block content %}
-    <div class="page-header header-filter"
-         data-parallax="true"
-            {# //@formatter:off #}
+  <div class="page-header header-filter"
+       data-parallax="true"
+          {# //@formatter:off #}
          style="background-image: url('{{ SITEURL }}{% if article %}{{ article.banner_image }}{% else %}{{ page.banner_image }}{% endif %}');">
             {# //@formatter:on #}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 ml-auto mr-auto text-center">
-                    {% if article.status == 'draft' %}
-                        <div class="card bg-danger">
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <i class="fa fa-exclamation-circle"></i> You are looking at a draft version of this
-                                    post.
-                                </h4>
-                            </div>
-                        </div>
-                    {% endif %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto text-center">
+          {% if article.status == 'draft' %}
+            <div class="card bg-danger">
+              <div class="card-body">
+                <h4 class="card-title">
+                  <i class="fa fa-exclamation-circle"></i> You are looking at a draft version of this
+                  post.
+                </h4>
+              </div>
+            </div>
+          {% endif %}
 
-                    <h1 class="title">{{ article.title }}</h1>
-                    {% if article.subtitle %}
-                        <h4>{{ article.subtitle }}</h4>
-                    {% endif %}
-                    <br>
-                    <button class="btn btn-rose btn-round btn-lg" id="btnScrollToArticle">
-                        <i class="material-icons">format_align_left</i> Read Article
-                    </button>
-                </div>
-            </div>
+          <h1 class="title">{{ article.title }}</h1>
+          {% if article.subtitle %}
+            <h4>{{ article.subtitle }}</h4>
+          {% endif %}
+          <br>
+          <button class="btn btn-rose btn-round btn-lg" id="btnScrollToArticle">
+            <i class="material-icons">format_align_left</i> Read Article
+          </button>
         </div>
+      </div>
     </div>
-    <div class="main main-raised" id="article">
-        <div class="container">
-            <div class="section section-text">
-                <div class="row">
-                    <div class="col-md-8 ml-auto mr-auto">
-                        {{ article.content }}
-                    </div>
-                </div>
-            </div>
-            <div class="section section-blog-info">
-                <div class="row">
-                    <div class="col-md-8 ml-auto mr-auto">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="blog-tags">
-                                    Tags: {{ tags.all_tags_for_article(article) }}
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="card card-profile card-plain">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="card-avatar">
-                                        <a href="{{ article.author.url }}">
-                                            <img class="img" src="{{ article.author_image }}">
-                                        </a>
-                                        <div class="ripple-container"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <h4 class="card-title">{{ article.author }}</h4>
-                                    <p class="description">{{ article.author_short_description }}</p>
-                                </div>
-                                <div class="col-md-2">
-                                    {% if article.author_github_profile %}
-                                        <a class="btn btn-social btn-just-icon btn-github"
-                                           href="https://github.com/{{ article.author_github_profile }}"
-                                           target="_blank">
-                                            <i class="fab fa-github"></i>
-                                        </a>
-                                    {% endif %}
-                                    {% if article.author_linkedin_username %}
-                                        <a class="btn btn-social btn-just-icon btn-linkedin"
-                                           href="https://linkedin.com/in/{{ article.author_linkedin_username }}"
-                                           target="_blank">
-                                            <i class="fab fa-linkedin"></i>
-                                        </a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        {% if article.bibliography %}
-                            <hr>
-                            <div class="card card-plain">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card-body" id="bibliography">
-                                            <h4 class="card-title">Bibliograpy</h4>
-                                            <ol class="list-group">
-                                                {% for cite in article.bibliography.cites %}
-                                                    <li class="list-group-item list-group-item-bibliography"
-                                                        id="{{ cite.ref_id }}">
-                                                        {{ cite.rendered_entry }}
-                                                        {%- for i in range(1, cite.count + 1) -%}
-                                                            <a class="cite-backref"
-                                                               href="#ref-{{ cite.ref_id }}-{{ i }}"
-                                                               title="Jump back to reference {{ i }}"
-                                                            ><sup><i><b>{{ i }}</b></i></sup></a>
-                                                        {% endfor %}
-                                                    </li>
-                                                {% endfor %}
-                                            </ol>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+  </div>
+  <div class="main main-raised" id="article">
+    <div class="container">
+      <div class="section section-text">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            {{ article.content }}
+          </div>
         </div>
+      </div>
+      <div class="section section-blog-info">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="blog-tags">
+                  Tags: {{ tags.all_tags_for_article(article) }}
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="card card-profile card-plain">
+              <div class="row">
+                <div class="col-md-2">
+                  <div class="card-avatar">
+                    <a href="{{ article.author.url }}">
+                      <img class="img" src="{{ article.author_image }}">
+                    </a>
+                    <div class="ripple-container"></div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <h4 class="card-title">{{ article.author }}</h4>
+                  <p class="description">{{ article.author_short_description }}</p>
+                </div>
+                <div class="col-md-2">
+                  {% if article.author_github_profile %}
+                    <a class="btn btn-social btn-just-icon btn-github"
+                       href="https://github.com/{{ article.author_github_profile }}"
+                       target="_blank">
+                      <i class="fab fa-github"></i>
+                    </a>
+                  {% endif %}
+                  {% if article.author_linkedin_username %}
+                    <a class="btn btn-social btn-just-icon btn-linkedin"
+                       href="https://linkedin.com/in/{{ article.author_linkedin_username }}"
+                       target="_blank">
+                      <i class="fab fa-linkedin"></i>
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% if article.bibliography %}
+              <hr>
+              <div class="card card-plain">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card-body" id="bibliography">
+                      <h4 class="card-title">Bibliograpy</h4>
+                      <ol class="list-group">
+                        {% for cite in article.bibliography.cites %}
+                          <li class="list-group-item list-group-item-bibliography"
+                              id="{{ cite.ref_id }}">
+                            {{ cite.rendered_entry }}
+                            {%- for i in range(1, cite.count + 1) -%}
+                              <a class="cite-backref"
+                                 href="#ref-{{ cite.ref_id }}-{{ i }}"
+                                 title="Jump back to reference {{ i }}"
+                              ><sup><i><b>{{ i }}</b></i></sup></a>
+                            {% endfor %}
+                          </li>
+                        {% endfor %}
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ SITEURL }}/theme/js/article.bundle.js" type="text/javascript"></script>
+  <script src="{{ SITEURL }}/theme/js/article.bundle.js" type="text/javascript"></script>
 {% endblock %}

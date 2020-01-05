@@ -1,11 +1,11 @@
 {% macro tag_as_pill(tag) %}
-<a href="{{ SITEURL }}/{{ tag.url }}" class="badge badge-pill badge-lg badge-primary">
+  <a href="{{ SITEURL }}/{{ tag.url }}" class="badge badge-pill badge-lg badge-primary">
     {{ tag.name }}
-</a>
+  </a>
 {% endmacro %}
 
 {% macro all_tags_for_article(article) %}
-    {% for tag in article.tags %}
-        {{ tag_as_pill(tag) }}
-    {% endfor %}
+  {% for tag in article.tags %}
+    {{ tag_as_pill(tag) }}
+  {% endfor %}
 {% endmacro %}

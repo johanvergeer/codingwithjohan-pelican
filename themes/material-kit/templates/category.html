@@ -3,26 +3,26 @@
 {% import 'includes/_article.html' as article %}
 
 {% block content %}
-    <div class="main main-raised">
-        <div class="section section-basic">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="title mb-5">
-                            <h1>Articles from {{ macros.first_letter_uppercase(category.name) }} Category</h1>
-                        </div>
-
-                        {% for a in articles_page.object_list %}
-                            {{ article.article_excerpt(a) }}
-                        {% endfor %}
-                    </div>
-                </div>
-                {% if articles_page.has_other_pages() and PAGINATED_TEMPLATES['category'] %}
-                    <div class="row">
-                        {% include 'includes/_pagination.html' %}
-                    </div>
-                {% endif %}
+  <div class="main main-raised">
+    <div class="section section-basic">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="title mb-5">
+              <h1>Articles from {{ macros.first_letter_uppercase(category.name) }} Category</h1>
             </div>
+
+            {% for a in articles_page.object_list %}
+              {{ article.article_excerpt(a) }}
+            {% endfor %}
+          </div>
         </div>
+        {% if articles_page.has_other_pages() and PAGINATED_TEMPLATES['category'] %}
+          <div class="row">
+            {% include 'includes/_pagination.html' %}
+          </div>
+        {% endif %}
+      </div>
     </div>
+  </div>
 {% endblock %}
