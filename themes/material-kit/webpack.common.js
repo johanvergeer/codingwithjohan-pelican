@@ -3,9 +3,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        'main': './src/index.js',
+        'article': './src/js/article.js'
+    },
     output: {
-        filename: "js/[name].js?[hash]",
+        filename: "js/[name].bundle.js?[hash]",
         path: path.resolve(__dirname, "static")
     },
     externals: {
@@ -34,7 +37,7 @@ module.exports = {
                         }
                     },
                     {
-                        loader: "css-loader"
+                        loader: "css-loader",
                     },
                     {
                         loader: "sass-loader",
@@ -94,16 +97,16 @@ module.exports = {
         ]
     },
     plugins: [
-        new MiniCssExtractPlugin({
-            filename: "css/[name].css?[hash]",
-            chunkFilename: "css/[name].css?[hash]"
-        }),
         new webpack.ProvidePlugin({
             'window.jQuery': 'jquery',
             'window.$': 'jquery',
             'jQuery': 'jquery',
             '$': 'jquery',
             'Popper': ['popper.js', 'default']
+        }),
+        new MiniCssExtractPlugin({
+            filename: "css/[name].bundle.css?[hash]",
+            chunkFilename: "css/[name].bundle.css?[hash]"
         }),
     ]
 }
