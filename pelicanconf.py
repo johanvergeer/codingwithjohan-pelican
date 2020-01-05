@@ -57,12 +57,6 @@ FAVICON = "/img/favicon-32.png"
 # Value of the "Read More" button on each post excerpt
 READ_MORE = "Read more"
 
-# The default image displayed on the articles list
-DEFAULT_ARTICLE_EXCERPT_IMAGE = "/img/1_500px.jpg"
-
-# The default image displayed on the article page
-DEFAULT_ARTICLE_PAGE_IMAGE = ""
-
 # ==================================================
 # Plugins
 # ==================================================
