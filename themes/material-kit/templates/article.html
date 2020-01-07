@@ -3,8 +3,14 @@
 {% import 'includes/_tags.html' as tags %}
 
 {% block title %}
-  {{ SITENAME }} | {{ article.title }}
+  {{ article.title }}
 {% endblock title %}
+
+{% if article.description %}
+  {% block description %}
+    {{ article.description }}
+  {% endblock %}
+{% endif %}
 
 {% block meta %}
   {% if article.status == 'draft' %}
@@ -19,8 +25,9 @@
   <div class="page-header header-filter"
        data-parallax="true"
           {# //@formatter:off #}
-         style="background-image: url('{{ SITEURL }}{% if article %}{{ article.banner_image }}{% else %}{{ page.banner_image }}{% endif %}');">
+         style="background-image: url('{{ SITEURL }}{% if article %}{{ article.banner_image }}{% else %}{{ page.banner_image }}{% endif %}');"
             {# //@formatter:on #}
+  >
     <div class="container">
       <div class="row">
         <div class="col-md-8 ml-auto mr-auto text-center">
@@ -59,39 +66,41 @@
       <div class="section section-blog-info">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="blog-tags">
-                  Tags: {{ tags.all_tags_for_article(article) }}
+            {% if article.tags %}
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="blog-tags">
+                    Tags: {{ tags.all_tags_for_article(article) }}
+                  </div>
                 </div>
               </div>
-            </div>
+            {% endif %}
             <hr>
             <div class="card card-profile card-plain">
               <div class="row">
                 <div class="col-md-2">
                   <div class="card-avatar">
                     <a href="{{ SITEURL }}/{{ article.author.url }}">
-                      <img class="img" src="{{ article.author_image }}">
+                      <img class="img" src="{{ article.author.image }}">
                     </a>
                     <div class="ripple-container"></div>
                   </div>
                 </div>
                 <div class="col-md-8">
                   <h4 class="card-title">{{ article.author }}</h4>
-                  <p class="description">{{ article.author_short_description }}</p>
+                  <p class="description">{{ article.author.short_description }}</p>
                 </div>
                 <div class="col-md-2">
-                  {% if article.author_github_profile %}
+                  {% if article.author.github %}
                     <a class="btn btn-social btn-just-icon btn-github"
-                       href="https://github.com/{{ article.author_github_profile }}"
+                       href="https://github.com/{{ article.author.github }}"
                        target="_blank">
                       <i class="fab fa-github"></i>
                     </a>
                   {% endif %}
-                  {% if article.author_linkedin_username %}
+                  {% if article.author.linkedin %}
                     <a class="btn btn-social btn-just-icon btn-linkedin"
-                       href="https://linkedin.com/in/{{ article.author_linkedin_username }}"
+                       href="https://linkedin.com/in/{{ article.author.linkedin }}"
                        target="_blank">
                       <i class="fab fa-linkedin"></i>
                     </a>

@@ -1,26 +1,80 @@
 {% extends '_layout.html' %}
 {% import 'includes/_article.html' as article %}
 
+{% block title %}
+   {{ author }} | {{ SITENAME }}
+{% endblock %}
+
+{% block description %}
+  {{ author.short_description }}
+{% endblock %}
+
+{% block body_class %}profile-page sidebar-collapse{% endblock %}
+
 {% block content %}
+  <div class="page-header header-filter"
+       data-parallax="true"
+       style="background-image: url('{{ static }}{{ HOMEPAGE_BANNER }}')">
+  </div>
   <div class="main main-raised">
-    <div class="section section-basic">
+    <div class="profile-content">
       <div class="container">
         <div class="row">
-          <div class="col-md-8">
-            <div class="title mb-5">
-              <h1>Articles by {{ author }}</h1>
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile">
+              <div class="avatar">
+                <img src="{{ SITEURL }}/img/johan_96px.png" alt="Johan Vergeer"
+                     class="img-raised rounded-circle img-fluid">
+              </div>
+              <div class="name">
+                <h3 class="title">{{ author.name }}</h3>
+                <h6>{{ author.job_description }}</h6>
+                {% if author.github %}
+                  <a href="https://github.com/{{ author.github }}" class="btn btn-just-icon btn-link btn-github">
+                    <i class="fab fa-github"></i>
+                  </a>
+                {% endif %}
+                {% if author.twitter %}
+                  <a href="https://twitter.com/{{ author.twitter }}" class="btn btn-just-icon btn-link btn-twitter">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                {% endif %}
+                {% if author.linkedin %}
+                  <a href="https://linkedin.com/in/{{ author.linkedin }}"
+                     class="btn btn-just-icon btn-link btn-linkedin">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                {% endif %}
+                {% if author.stack_overflow %}
+                  <a href="https://stackoverflow.com/users/{{ author.stack_overflow }}"
+                     class="btn btn-just-icon btn-link btn-stack-overflow">
+                    <i class="fab fa-stack-overflow"></i>
+                  </a>
+                {% endif %}
+              </div>
             </div>
-
-            {% for a in articles_page.object_list %}
-              {{ article.article_excerpt(a) }}
-            {% endfor %}
           </div>
         </div>
-        {% if articles_page.has_other_pages() and PAGINATED_TEMPLATES['author'] %}
-          <div class="row">
-            {% include 'includes/_pagination.html' %}
+        <div class="description text-center">
+          {{ author.description }}
+        </div>
+        <div class="container">
+          <div class="section" id="articles">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h2 class="title">Latest Articles</h2>
+              </div>
+            </div>
+            <div class="row">
+              {% for a in articles_page.object_list %}
+                {{ article.article_excerpt(a) }}
+                {% if loop.index == ARTICLES_ON_HOMEPAGE %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
-        {% endif %}
+        </div>
       </div>
     </div>
   </div>

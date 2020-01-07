@@ -18,6 +18,7 @@ SITEURL = ''
 THEME = 'themes/material-kit'
 
 PATH = 'content'
+AUTHORS_PATH = 'authors'
 
 TIMEZONE = 'Europe/Amsterdam'
 
@@ -29,11 +30,6 @@ DEFAULT_METADATA = {
     "status": "draft",
     "excerpt_image": "/img/1_500px.jpg",
     "banner_image": "/img/1_1000px.jpg",
-    "author_image": "/img/johan_96px.png",
-    "author_short_description": "I've been developing software for five years now, "
-                                "and I still do it with a lot of passion.",
-    "author_linkedin_username": "johanvergeer",
-    "author_github_profile": "johanvergeer"
 }
 
 # ==================================================
@@ -67,6 +63,7 @@ PLUGINS = [
     'pelican.plugins.add_css_classes',
     'pelican.plugins.timegraphics',
     'pelican.plugins.series',
+    'authors_meta'
 ]
 
 # ==================================================
