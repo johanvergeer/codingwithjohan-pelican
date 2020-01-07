@@ -38,6 +38,9 @@ def add_author_metadata(generator: Generator):
     for article in generator.articles:
         for author in article.authors:
             add_metadata(author, generator)
+    for draft in generator.drafts:
+        for author in draft.authors:
+            add_metadata(author, generator)
     for author, _ in generator.authors:
         add_metadata(author, generator)
 
