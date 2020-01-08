@@ -1,6 +1,7 @@
+---
 Title: VS Code Extensions
 Tags: VS Code, Visual Studio Code
-author: Johan Vergeer
+---
 
 One of the many great things about VS Code is it's extensibility, and the many extensions that are out there in the marketplace. This is a list of extensions I use and wanted to share with you.
 

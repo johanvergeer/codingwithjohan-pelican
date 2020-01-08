@@ -1,5 +1,7 @@
+---
 Title: Exception handling in UML Sequence Diagram
 Tags: UML, Sequence Diagrams
+---
 
 > UML provides neither notation to model exception handling in sequence diagrams nor any reasoning why it is absent. Some clumsy approaches to model try-catch blocks are by utilizing __combined fragments - alt__ (alternatives) and __breaks__, while adding stereotypes for __reply messages__ representing thrown exceptions. There are several proposed notations for exception handling. [^1]
 
