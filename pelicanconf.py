@@ -168,6 +168,7 @@ PAGINATION_PATTERNS = (
 
 # ==================================================
 # CSS Classes
+# IMPORTANT: Make sure the classes are also added to the PurgecssPlugin in webpack.prod.js
 # ==================================================
 ADD_CSS_CLASSES = {
     "table": ["table"],
