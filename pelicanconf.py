@@ -80,7 +80,8 @@ MARKDOWN = {
         'pymdownx.superfences',
         'footnotes',
         'toc',
-        'python_markdown_comments'
+        'python_markdown_comments',
+        'tables'
     ],
     'extension_configs': {
         "pymdownx.emoji": {
@@ -179,6 +180,8 @@ ADD_CSS_CLASSES_TO_PAGE = {
 
 ADD_CSS_CLASSES_TO_ARTICLE = {
     "blockquote": ["blockquote"],
+    "h1": ["title"],
+    "h2": ["title"],
     "h3": ["title"]
 }
 
