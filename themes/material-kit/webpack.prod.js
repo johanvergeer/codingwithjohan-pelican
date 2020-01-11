@@ -20,7 +20,9 @@ module.exports = merge(common, {
       paths: glob.sync([
         'templates/**'
       ], {nodir: true}),
-      whitelist: ['blockquote', 'table', 'title']
+      whitelist: [
+        'blockquote', 'table', 'title', 'checklist'
+      ]
     })
   ]
 });

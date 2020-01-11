@@ -21,6 +21,7 @@ pelican-timegraphics-plugin = "^1.0.0"
 python-markdown-comments = "^1.0.0"
 pelican-cite = "^1.0.0"
 pybtex-author-year-label = "^1.0.0"
+markdown-checklist = "^0.4.1"
 
 [tool.poetry.dev-dependencies]
 
