@@ -1,6 +1,10 @@
+.list-group-bibliography {
 
-.list-group-item-bibliography {
-  :first-child {
-    margin-right: 0;
-  }
+    .list-group-item-bibliography {
+        padding: 0 0 10px;
+
+        :first-child {
+            margin-right: 0;
+        }
+    }
 }

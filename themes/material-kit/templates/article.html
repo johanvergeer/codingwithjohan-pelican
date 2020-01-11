@@ -108,6 +108,32 @@
                 </div>
               </div>
             </div>
+            {% if article.sources %}
+              <hr>
+              <div class="card card-plain">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card-body" id="bibliography">
+                      <h4 class="card-title">Sources</h4>
+                      <ol class="list-group list-group-bibliography">
+                        {% for source in article.sources %}
+                          {% if source == '' %}
+                            {% continue %}
+                          {% endif %}
+                          <li class="list-group-item list-group-item-bibliography">
+                            {% if source.startswith('http') %}
+                             <a href="{{- source -}}" target="_blank">{{- source -}}</a>
+                            {% else %}
+                              {{- source -}}
+                            {% endif %}
+                          </li>
+                        {% endfor %}
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
             {% if article.bibliography %}
               <hr>
               <div class="card card-plain">
@@ -115,11 +141,11 @@
                   <div class="col-md-12">
                     <div class="card-body" id="bibliography">
                       <h4 class="card-title">Bibliograpy</h4>
-                      <ol class="list-group">
+                      <ol class="list-group list-group-bibliography">
                         {% for cite in article.bibliography.cites %}
                           <li class="list-group-item list-group-item-bibliography"
                               id="{{ cite.ref_id }}">
-                            {{ cite.rendered_entry }}
+                            {{- cite.rendered_entry -}}
                             {%- for i in range(1, cite.count + 1) -%}
                               <a class="cite-backref"
                                  href="#ref-{{ cite.ref_id }}-{{ i }}"
