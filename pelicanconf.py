@@ -73,7 +73,7 @@ MARKDOWN = {
     'extensions': [
         'mk_card',
         'markdown.extensions.attr_list',
-        'pymdownx.emoji',
+        'pymdownx.emoji',  # https://www.webfx.com/tools/emoji-cheat-sheet/
         'pymdownx.highlight',
         'pymdownx.mark',
         'pymdownx.progressbar',
@@ -81,7 +81,8 @@ MARKDOWN = {
         'footnotes',
         'toc',
         'python_markdown_comments',
-        'tables'
+        'tables',
+        'markdown_checklist.extension'
     ],
     'extension_configs': {
         "pymdownx.emoji": {
@@ -182,7 +183,7 @@ ADD_CSS_CLASSES_TO_ARTICLE = {
     "blockquote": ["blockquote"],
     "h1": ["title"],
     "h2": ["title"],
-    "h3": ["title"]
+    "h3": ["title"],
 }
 
 # ==================================================
