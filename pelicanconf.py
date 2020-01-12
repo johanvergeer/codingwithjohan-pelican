@@ -60,10 +60,10 @@ READ_MORE = "Read more"
 PLUGINS = [
     'pelican_gist',
     'pelican_cite',
+    'pelican_authors_meta',
     'pelican.plugins.add_css_classes',
     'pelican.plugins.timegraphics',
     'pelican.plugins.series',
-    'authors_meta'
 ]
 
 # ==================================================
