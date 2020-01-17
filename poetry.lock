@@ -330,6 +330,20 @@ markdown = ["markdown (>=3.1.1,<4.0.0)"]
 
 [[package]]
 category = "main"
+description = "A Pelican plugin that allows you to cross-reference articles"
+name = "pelican-xref"
+optional = false
+python-versions = ">=3.6,<4.0"
+version = "0.1.0"
+
+[package.dependencies]
+pelican = ">=4.2,<5.0"
+
+[package.extras]
+markdown = ["markdown (>=3.1.1,<4.0.0)"]
+
+[[package]]
+category = "main"
 description = "Backport of PEP 562."
 name = "pep562"
 optional = false
@@ -588,7 +602,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "f47cf1bcda56a48fcd05780d18de275e3af27d6206ba2e1a0cfa7ca346babd85"
+content-hash = "217e5bcd545021f6c39aad887e610c070b63f98170f2666682301ed7e52aa2ba"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -728,6 +742,10 @@ pelican-series-plugin = [
 pelican-timegraphics-plugin = [
     {file = "pelican-timegraphics-plugin-1.0.1.tar.gz", hash = "sha256:07371bdb7bb7541e212bade4a11b315790f99975247c2deef55e227997db762e"},
     {file = "pelican_timegraphics_plugin-1.0.1-py3-none-any.whl", hash = "sha256:444d3f5697f1de916c04f5f97d654e3cbb2e24568435b6a8529cefd8b371a47d"},
+]
+pelican-xref = [
+    {file = "pelican-xref-0.1.0.tar.gz", hash = "sha256:8ee9c976d221dd412cfd01672528b478c35513f8eaa41995c035c5c377feef4b"},
+    {file = "pelican_xref-0.1.0-py3-none-any.whl", hash = "sha256:fb6706d8f4a5f75300c50fc82027436b6243a642007a1e7df2362a23f227ee6f"},
 ]
 pep562 = [
     {file = "pep562-1.0-py2.py3-none-any.whl", hash = "sha256:d2a48b178ebf5f8dd31709cc26a19808ef794561fa2fe50ea01ea2bad4d667ef"},

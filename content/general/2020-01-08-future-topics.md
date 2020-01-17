@@ -14,3 +14,4 @@ This is a list with (possible) future topics for my blog.
 - [ ] Test driven development
     - [ ] Pytest
 - [ ] UML
+- [ ] My setup (Pycharm, Poetry, VIM)

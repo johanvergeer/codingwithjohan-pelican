@@ -59,8 +59,9 @@ READ_MORE = "Read more"
 
 PLUGINS = [
     'pelican_gist',
-    'pelican_cite',
+    'pelican_cite',  # http://bib-it.sourceforge.net/help/fieldsAndEntryTypes.php
     'pelican_authors_meta',
+    'pelican_xref',
     'pelican.plugins.add_css_classes',
     'pelican.plugins.timegraphics',
     'pelican.plugins.series',
