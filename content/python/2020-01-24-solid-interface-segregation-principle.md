@@ -3,6 +3,7 @@ Title: Interface Segregation Principle with Python
 xref: python-interface-segregation-principle
 Tags: SOLID,Python,ISP,Interface Segregation principle
 description: Interface Segregation Principle with Python. Why and How?
+status: published
 sources: 
     <a href="https://hackernoon.com/interface-segregation-principle-bdf3f94f1d11" target="_blank">Interface Segregation Principle (Hackernoon)</a>
     
@@ -30,19 +31,15 @@ And you know your abstractions are incorrect when a client depends on methods it
 
 ## Interface Segregation Principle example
 
-When you read this example I assume you have a base knowledge of Python, dataclasses and typing.
+When you read this example I assume you have a base knowledge of Python, dataclasses and type hinting.
 
 In this example I will use items you might buy in an online book store. 
 
 ### First phase: just books
 
-I will begin with a class called `Book`, which can be displayed with a `BooksPage` and added to a `Cart`.
+Let's begin with a class called `Book`.
 
 ```python
-from decimal import Decimal
-from typing import List
-from dataclasses import dataclass
-
 @dataclass
 class Book:
     product_id: int
@@ -51,7 +48,11 @@ class Book:
     page_count: int
     price: Decimal
     cover: str
+```
 
+Next we have a `Cart` class that the user can add books to.
+
+```python
 class Cart:
     def __init__(self):
         self._books: List[Book] = []
@@ -62,7 +63,11 @@ class Cart:
     @property
     def books(self) -> List[Book]:
         return self._books.copy()
+```
 
+Finally we create a `BooksPage` class that will show books to the user.
+
+```python
 class BooksPage:
     def __init__(self, books: List[Book]):
         self._books = books
@@ -71,27 +76,25 @@ class BooksPage:
         return self._books
 ```
 
+So far it has been very easy, but later on we'll find out there are some issues with the design.
+
 ### Second phase: adding dvd's
 
-After a while the shop owner tells you that he also wants to start selling dvd's. 
+After a while the shop says he wants to start selling dvd's. 
 This is something we did not anticipate on and the `Cart` class only accepts `Book` instances.
 
-We want to create small separate interfaces that can be used by clients.
+If we want to follow the ISP we have to create small interfaces that can be used by clients.
 
-So what can we do? First of all we have to see which attributes of the `Book` are shared with other items 
+So what can we do? First of all we have to figure out which attributes of the `Book` are shared with other items 
 that are sold in the store. In this case those attributes are `product_id`, `title` and `price`. 
 All other attributes only apply to `Book`. 
-So we will create a [Protocol](https://mypy.readthedocs.io/en/stable/protocols.html#simple-user-defined-protocols){:target="_blank"} 
-class that can be used for all shop items.
+We will use [Protocols](https://mypy.readthedocs.io/en/stable/protocols.html#simple-user-defined-protocols){:target="_blank"} 
+to define the interfaces.
 
-The `Cart` will accept any `Product`. `BooksPage` will remain the same and a `DvdsPage` will be added.
+First we create a `Product` protocol class that contains all common attributes, 
+and change the `Book` class which will now inherit from `Product`.
 
 ```python
-from dataclasses import dataclass
-from decimal import Decimal
-from typing import List
-from typing_extensions import Protocol
-
 @dataclass
 class Product(Protocol):
     product_id: int
@@ -103,12 +106,19 @@ class Book(Product):
     author: str
     page_count: int
     cover: str
+```
 
+Next we create the new DVD class, which also inherits from `Product`.
+
+```python
 @dataclass
 class Dvd(Product):
     director: str
     duration: int
+```
 
+Now `Cart` will take in any `Product` instead of just books.
+```python
 class Cart:
     def __init__(self):
         self._products: List[Product] = []
@@ -119,10 +129,11 @@ class Cart:
     @property
     def products(self) -> List[Product]:
         return self._products.copy()
+```
 
-class BooksPage:
-    ...
+And we create a brand new page where the user can view DVD's. 
 
+```python
 class DvdsPage:
 
     def __init__(self, dvds: List[Dvd]):
@@ -132,16 +143,20 @@ class DvdsPage:
         return self._dvds
 ```
 
+So we segregated some attributes out of `Book` in to the `Product` protocol class, 
+which allows use to add all products to the cart, and still let each of them have their own attributes. :sunglasses:
+
 ### Third phase: adding an e-book
 
-After we added the dvd's out client comes back and says he wants to start selling e-books. 
-We could just use `Book` but that has a `cover`, which doesn't apply to an e-book. 
+After we added the dvd's the client comes back and says he wants to start selling e-books. 
+We could just use `Book` but that has a `cover`, which doesn't apply to an e-book.
+And e-books have a file size, which don't apply to a paper book.
 This means we have to do another refactoring.
 
 !!! info
      Refactoring is a very common and important part of software development.
 
-Product stays the same, but we will add a `Readable` and a `ReadableProduct` Protocol class.
+`Product` stays the same, but we will add `Readable` and `ReadableProduct` Protocol classes.
 `ReadableProduct` inherits from both `Product` and `Readable`.
 
 ```python
@@ -155,7 +170,7 @@ class ReadableProduct(Product, Readable, Protocol):
     pass
 ``` 
 
-Next both `Book` and `PDF` will inherit from `ReadableProduct`. But `Book` has a `cover` and `PDF` has a `duration`.
+Next both `Book` and `EBook` will inherit from `ReadableProduct`. `Book` has a `cover` and `EBook` has a `file_size`.
 
 ```python
 @dataclass
@@ -163,11 +178,12 @@ class Book(ReadableProduct):
     cover: str
 
 @dataclass
-class PDF(ReadableProduct):
+class EBook(ReadableProduct):
     file_size: int
 ```
 
-Now all we have to do is create a `ReadableProducts` page which will be used to display both books and pdfs. 
+Now all we have to do is change `BooksPage` to a `ReadableProductsPage` 
+page which will be used to display both books and e-books. 
 
 ```python
 class ReadableProductsPage:
