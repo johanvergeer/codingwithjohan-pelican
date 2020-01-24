@@ -21,12 +21,12 @@ module.exports = merge(common, {
         'templates/**'
       ], {nodir: true}),
       whitelist: [
-        'blockquote', 'table', 'title', 'checklist',
+        'blockquote', 'table', 'title', 'checklist', 'code',
         // Code highlight
         'highlight', 'hll', 'c', 'err', 'k', 'o', 'ch', 'cm', 'cp', 'cpf', 'c1', 'cs', 'gd', 'ge', 'gr', 'gh', 'gi',
         'go', 'gp', 'gs', 'gu', 'gt', 'kc', 'kd', 'kn', 'kp', 'kr', 'kt', 'm', 's', 'na', 'nb', 'nc', 'no', 'nd',
         'ni', 'ne', 'nf', 'nl', 'nn', 'nt', 'nv', 'ow', 'w', 'mb', 'mf', 'mh', 'mi', 'mo', 'sa', 'sb', 'sc', 'dl',
-        'sd', 's2', 'se', 'sh', 'si', 'sx', 'sr', 's1', 'ss', 'bp', 'fm', 'vc', 'vg', 'vi', 'vm', 'il'
+        'sd', 's2', 'se', 'sh', 'si', 'sx', 'sr', 's1', 'ss', 'bp', 'fm', 'vc', 'vg', 'vi', 'vm', 'il', 'n'
       ]
     })
   ]
