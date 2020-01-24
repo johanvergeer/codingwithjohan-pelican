@@ -2,7 +2,7 @@
 Title: Interface Segregation Principle with Python
 xref: python-interface-segregation-principle
 Tags: SOLID,Python,ISP,Interface Segregation principle
-description: Interface Segregation Principle with Python. Why and How?
+description: This article explains how you can use Protocols to apply the Interface Segregation Principle in Python.
 status: published
 sources: 
     <a href="https://hackernoon.com/interface-segregation-principle-bdf3f94f1d11" target="_blank">Interface Segregation Principle (Hackernoon)</a>
