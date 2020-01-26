@@ -1,20 +1,100 @@
 ---
-Title: Python Dependency Injection Frameworks comparison
+Title: Python Dependency Injection Frameworks
 xref: python-dependency-injection-frameworks
 Tags: Python,Dependency Injection
-description: TODO
+description: This article looks into Dependency Injection with Python and the frameworks available for you.
 status: published
-sources: 
+sources:
+    <a href="https://martinfowler.com/articles/injection.html#InversionOfControl" target="_blank">Inversion of Control Containers and the Dependency Injection pattern by Martin Fowler</a>
+    <a href="http://tutorials.jenkov.com/dependency-injection/index.html" target="_blank">Dependency Injection by Jakob Jenkov</a>
+    <a href="https://en.wikipedia.org/wiki/Dependency_injection" target="_blank">Dependency Injection on Wikipedia</a>
 ---
 
-### Dependency injection frameworks
+Even though the usage of Dependency Injection is not as common in the Python community as it is in the C# or Java communities, 
+it is still a very powerful way to implement the [xref:python-dependency-inversion-principle title="Dependency Inversion Principle"].
+Thankfully there are several packages available to us that provide us with a dependency injection implementation, 
+which I will discuss in this article.
 
-One way to solve this issue is by using dependency injection frameworks. 
-These frameworks will take care of the dependencies you need at runtime anywhere you need them. 
 
-There are several dependency injection frameworks for Python that are still under active maintenance. 
+Dependency injection is a style of object configuration in which an objects fields and collaborators are set by an external entity. 
+In other words objects are configured by some other object. 
+When you are using Dependency injection an object is no longer responsible for configuring itself.
+This is taken care of by the container instead. This might be a bit abstract so let's start with a simple example:
 
-#### Dependency Injector
+## Simple dependency injection example
+
+```python
+import imaplib
+
+
+class EmailClient:
+    def receive(self, username: str, password: str) -> List[str]:
+        server = imaplib.IMAP4('localhost', 993)
+        server.login(username, password)
+        server.select('INBOX')
+    
+        result, data = server.uid('search', None)
+
+        # Process result and data
+```
+
+In this example we have an `EmailClient` that uses `imaplib` to receive email messages.
+The problem we have here is the fact we hardwired `imaplib.IMAP4` into the email client 
+so we cannot use another protocol like `IMAP_SSL`.
+
+We can solve this with dependency injection. For this we make use of Pythons duck typing. 
+First we create a [Protocols](https://mypy.readthedocs.io/en/stable/protocols.html#simple-user-defined-protocols){:target="_blank"}
+we can use to define what we expect.
+
+```python
+from typing_extensions import Protocol
+
+class EmailReceiver(Protocol):
+    def login(self, user: str, password: str): ...
+    def select(self, mailbox='INBOX', readonly=False): ...
+    def uid(self, command, *args): ...
+```
+
+Next we change the EmailClient so it takes a `ReceivingEmailProtocol` and uses that to connect
+
+```python
+class EmailClient:
+    def __init__(self, email_receiver: EmailReceiver):
+        self.server = email_receiver
+
+    def receive(self, username: str, password: str) -> List[str]:
+        self.server.login(username, password)
+        self.server.select('INBOX')
+
+        result, data = self.server.uid('search', None)
+
+        # Process result and data
+```
+
+Lastly we create a new instance for the email receiver and start receiving email
+
+```python
+receiver: EmailReceiver = imaplib.IMAP4_SSL("localhost", 993)
+client = EmailClient(receiver)
+results = client.receive("codingwithjohan@gmail.com", "mysupersecretpasswd")
+```
+
+As you can see, in this case we are using the `IMAP4_SSL` instead of just `IMAP` 
+without having to change the `EmailClient`.
+
+## Python dependency injection frameworks comparison
+
+To compare the available dependency injection frameworks I'll keep the following items in mind:
+
+- Testability
+- Different scopes
+- Ease of use
+- Configurability
+
+I have limited my research to dependency injection frameworks that are still maintained and have a decent number of users.
+
+
+### Dependency Injector
 
 [![PyPI - License](https://img.shields.io/pypi/l/dependency_injector?style=for-the-badge)](https://pypi.org/project/dependency-injector/){:target="_blank"}
 
@@ -27,7 +107,7 @@ There are several dependency injection frameworks for Python that are still unde
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/ets-labs/python-dependency-injector?style=for-the-badge)](https://github.com/ets-labs/python-dependency-injector){:target="_blank"}
 [![GitHub commit activity](https://img.shields.io/github/contributors/ets-labs/python-dependency-injector?style=for-the-badge)](https://github.com/ets-labs/python-dependency-injector){:target="_blank"}
 
-#### Serum
+### Serum
 
 [![PyPI - License](https://img.shields.io/pypi/l/serum?style=for-the-badge)](https://pypi.org/project/Inject/){:target="_blank"}
 
@@ -40,7 +120,7 @@ There are several dependency injection frameworks for Python that are still unde
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/suned/serum?style=for-the-badge)](https://github.com/suned/serum){:target="_blank"}
 [![GitHub commit activity](https://img.shields.io/github/contributors/suned/serum?style=for-the-badge)](https://github.com/suned/serum){:target="_blank"}
 
-#### Pinject
+### Pinject
 
 [![PyPI - License](https://img.shields.io/pypi/l/pinject?style=for-the-badge)](https://pypi.org/project/pinject/){:target="_blank"}
 
@@ -53,7 +133,7 @@ There are several dependency injection frameworks for Python that are still unde
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/google/pinject?style=for-the-badge)](https://github.com/google/pinject){:target="_blank"}
 [![GitHub commit activity](https://img.shields.io/github/contributors/google/pinject?style=for-the-badge)](https://github.com/google/pinject){:target="_blank"}
 
-#### Injector
+### Injector
 
 [![PyPI - License](https://img.shields.io/pypi/l/injector?style=for-the-badge)](https://pypi.org/project/injector/){:target="_blank"}
 
@@ -68,7 +148,7 @@ There are several dependency injection frameworks for Python that are still unde
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/alecthomas/injector?style=for-the-badge)](https://github.com/alecthomas/injector){:target="_blank"}
 [![GitHub commit activity](https://img.shields.io/github/contributors/alecthomas/injector?style=for-the-badge)](https://github.com/alecthomas/injector){:target="_blank"}
 
-#### Python Inject
+### Python Inject
 
 [![PyPI - License](https://img.shields.io/pypi/l/inject?style=for-the-badge)](https://pypi.org/project/Inject/){:target="_blank"}
 
