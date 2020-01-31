@@ -83,7 +83,8 @@ MARKDOWN = {
         'toc',
         'python_markdown_comments',
         'tables',
-        'markdown_checklist.extension'
+        'markdown_checklist.extension',
+        'markdown_ratings'
     ],
     'extension_configs': {
         "pymdownx.emoji": {
