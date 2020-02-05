@@ -212,10 +212,18 @@ description = "A Markdown plugin to show star ratings on your page."
 name = "markdown-ratings"
 optional = false
 python-versions = ">=3.7,<4.0"
-version = "0.1.1"
+version = "0.1.2"
 
 [package.dependencies]
 markdown = ">=3.1.1,<4.0.0"
+
+[[package]]
+category = "main"
+description = "Markdown Extension to add target=\"_blank\" to all links."
+name = "markdown3-newtab"
+optional = false
+python-versions = "*"
+version = "0.2.0"
 
 [[package]]
 category = "main"
@@ -619,7 +627,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools"]
 
 [metadata]
-content-hash = "771ad07826b2f40a17723ecd3aed1b01eb0bd00ec5a94371a6a750bd6aa5fa5b"
+content-hash = "16a829e8de4626f94f4a730bc2529308ee439b4668952b46da3962d9c82a48f2"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -699,8 +707,12 @@ markdown-checklist = [
     {file = "markdown-checklist-0.4.1.tar.gz", hash = "sha256:f65dd8f18a2e3588f70ce3f2532f8df54c074b4715dfe1d40461123f7d879c70"},
 ]
 markdown-ratings = [
-    {file = "markdown-ratings-0.1.1.tar.gz", hash = "sha256:aed850a01222a41cc4b867f2b2b902a97a93b676f56fd0a91923ed0e52607254"},
-    {file = "markdown_ratings-0.1.1-py3-none-any.whl", hash = "sha256:570549f1fda3579b790ceac64e18e4a212ab9bc4f571d476561ccee3c995d68a"},
+    {file = "markdown-ratings-0.1.2.tar.gz", hash = "sha256:25a2d5d457e7eb7417e85f929628eb5b61460a955428ecec5c81607d13ce9386"},
+    {file = "markdown_ratings-0.1.2-py3-none-any.whl", hash = "sha256:0ba6529259506658c26cd67a2c8d36f7a775582ae909a8a0ed2453a242f6abd3"},
+]
+markdown3-newtab = [
+    {file = "markdown3_newtab-0.2.0-py3-none-any.whl", hash = "sha256:4379eee3a8b4ced2908c7826a05ab3d87f3c36dbf90fca7e02bbe225d454502b"},
+    {file = "markdown3_newtab-0.2.0.tar.gz", hash = "sha256:481d2cbaf392b1d86f835d9c5aa606ace235f533d4ad0b283c90454c714e5db2"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},

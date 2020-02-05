@@ -84,7 +84,8 @@ MARKDOWN = {
         'python_markdown_comments',
         'tables',
         'markdown_checklist.extension',
-        'markdown_ratings'
+        'markdown_ratings',
+        'markdown3_newtab'
     ],
     'extension_configs': {
         "pymdownx.emoji": {

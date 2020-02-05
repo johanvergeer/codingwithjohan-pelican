@@ -62,17 +62,11 @@ Let's make the _Single Responsibility Principle_ more clear with a simple exampl
 
 ```python
 class Book:
-    def __init__(self, name: str, author: str, content: str):
+    def __init__(self, name: str, author: str, content: str, page_count: int):
         self.name: str = name
         self.author: str = author
         self.content: str = content
-
-    def word_count(self, word: str) -> int:
-        count = 0
-        for w in self.content.split():
-            if w == word:
-                count += 1
-        return count
+        self.page_count: int = page_count
 ```
 
 Everything is fine it this first example. We instantiate the book, and we can get the count for a specific word.
@@ -85,13 +79,7 @@ class Book:
         self.name: str = name
         self.author: str = author
         self.content: str = content
-
-    def word_count(self, word: str) -> int:
-        count = 0
-        for w in self.content.split():
-            if w == word:
-                count += 1
-        return count
+        self.page_count: int = page_count
 
     def print(self):
         print(self.content)
@@ -181,42 +169,29 @@ programs `P` defined in terms of `T`, the behavior of `P` is unchanged when `o1`
 substituted for `o2` then `S` is a subtype of `T`. [@Liskov1987]
 
 This is a whole mouth full, so I will try to explain it with a simple example. 
-Let's continue with the code we used before. The `Book` class get's a `title` and `content` attribute, and a `page_count` property.
-That should work for any book, right?
+Let's continue with the code we used before. The `AbstractBook` class get's a `title`, `content` and `page_count` attribute.
+That should work for any type of book, right?
 
 ### Liskov Substitution Principle example
 
 ```python
-class Book(metaclass=ABCMeta):
-    def __init__(self, title, content):
+class AbstractBook(metaclass=ABCMeta):
+    def __init__(self, title, content, page_count):
         self.title = title
         self.content = content
-
-    @property
-    @abstractproperty
-    def page_count(self):
-        """Returns an estimated page count"""
-        pass
+        self.page_count = page_count
 ```
 
 So the product owner says he wants a *printable book* and a *PDF*, so let's give him that.
-They both implement `page_count`. `PrintableBook` also gets a `cover_type` attribute and `PDF` gets a `file_size` property.
+`PrintableBook` also gets a `cover_type` attribute and `PDF` gets a `file_size` property which calculates the file size in bytes.
 
 ```python
-class PrintableBook(Book):
-    def __init__(self, title, content, cover_type):
-        super().__init__(title, content)
+class PrintableBook(AbstractBook):
+    def __init__(self, title, content, page_count, cover_type):
+        super().__init__(title, content, page_count)
         self.cover_type = cover_type
 
-    @property
-    def page_count(self):
-        return len(self.content) / 3000
-
-class PDF(Book):
-
-    @property
-    def page_count(self):
-        return len(self.content) / 4000
+class PDF(AbstractBook):
 
     @property
     def file_size(self) -> int:
@@ -225,34 +200,34 @@ class PDF(Book):
 ```
 
 A couple of weeks go by and everything works fine. After a while the product owner comes in and asks if you can create an audio book.
-Sure you can. But this is also where you encounter an issue. An audio book doesn't have pages so it also doesn't have a page count.
-What you could do is just throw an error when `page_count` is called on `AudioBook`.
+Sure you can. But this is also where you encounter an issue. An audio book doesn't have pages so it also does not have a page count.
+What you could do is just set a default value of `-1` for `page_count`.
 
 ```python
-class AudioBook(Book):
+class AudioBook(AbstractBook):
+    def __init__(self, title, content, cover_type):
+        super().__init__(title, content, -1)
+        self.cover_type = cover_type
     @property
     def duration(self):
-        """Duration of the audio book in minutes"""
+        """Duration of the audio product in minutes"""
         return len(self.content) / 5000
-
-    def page_count(self):
-        raise NotImplementedError("An audio book does not have a page count!")
 ```
 
 But this also means the behavior does not match the behavior that you defined in the base class, which means the LSP is violated.
 In order to fix this we have to rethink the design and change the classes. 
-In this case we'll make use of Python's multiple inheritance.
+In this case we'll make use of Python's multiple inheritance ability.
 
 First we'll create an extra abstract class and extract `page_count` to it.
 
 ```python
-class Book(metaclass=ABCMeta):
+class AbstractBook(metaclass=ABCMeta):
     def __init__(self, title, content):
         self.title = title
         self.content = content
 
 
-class ReadableBook(metaclass=ABCMeta):
+class AbstractReadableBook(metaclass=ABCMeta):
     @property
     @abstractproperty
     def page_count(self):
@@ -291,9 +266,22 @@ And the `AudioBook` can inherit just from `Book` and doesn't have to implement `
 class AudioBook(Book):
     @property
     def duration(self):
-        """Duration of the audio book in minutes"""
+        """Duration of the audio product in minutes"""
         return len(self.content) / 5000
 ```
 
 Now clients of these classes can use both abstract classes as their input parameter types.
+
+## Interface Segregation Principle with Python
+
+> CLIENTS SHOULD NOT BE FORCED TO DEPEND UPON INTERFACES THAT THEY DO NOT USE. 
+
+When clients have to depend upon interfaces they don't use those clients have to deal with changes made to those interfaces.
+This causes an inadvertent coupling between all the clients. 
+This means that when a client depends upon a class that contains interfaces the client doesn't use, 
+that client will be affected by changes other clients, that do use the interface, force changes.
+
+We would like to avoid coupling where possible, and we want to separate interfaces where possible.  [@MartinISP]
+
+
 

@@ -26,6 +26,9 @@
     .star-checked {
       color: orange;
     }
+    .pro {
+      {#list-style-image: url("{{ static }}/img/procon.svg#layer1");#}
+    }
   </style>
 {% endblock %}
 
@@ -67,6 +70,7 @@
       <div class="section section-text">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto">
+            <img src="{{ static }}/test.svg#icon-heart" alt="" />
             {{ article.content }}
           </div>
         </div>
