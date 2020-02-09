@@ -99,17 +99,7 @@ In my experience monkey patching should be kept to a minimum. I only use it in m
 This chapter compares dependency injection frameworks for Python.
 
 I have limited my research to dependency injection frameworks that are still maintained and have a decent number of users.
-
-### Comparison items
-
-To compare the available dependency injection frameworks I'll keep the following items in mind:
-
-- Scoping: Scopes can be for example 'singleton', 'scoped' or 'per request'. How does the framework handle these scopes?
-- Coupling to the framework: How tight is the framework coupled to your code. 
-I usually tend to use frameworks that allow me to have very little or no coupling. 
-- Testability: How easy is it to test our code when using the framework?
-
-Next to these comparisons I have added some information about the project status and usage.
+I also did not include any examples because each framework already provides very good examples.
 
 ### Dependency Injector
 
@@ -117,34 +107,18 @@ Dependency Injector is a dependency injection microframework for Python created 
 It was designed to be a unified and developer-friendly tool that helps implement 
 a dependency injection design pattern in a formal, pretty, and Pythonic way.
 
-#### Scoping
+<ul class="procon pro">
+<li>Very flexible</li>
+<li>Factory Providers that creates a new instance on each call</li>
+<li>Singleton Providers  that creates a new instance on the first call and returns that same instance every next call</li>
+<li>Allows clients of your library to inject dependencies</li>
+<li>Doesn't interfere with your existing code</li>
+</ul>
 
-Dependency Injector works with providers to create scopes. 
-They have [Factory Providers](http://python-dependency-injector.ets-labs.org/providers/factory.html) that creates a new instance on each call, 
-a [Singleton Provider](http://python-dependency-injector.ets-labs.org/providers/singleton.html) that creates a new instance on the first call and returns that same instance every next call
-and providers for [callables](http://python-dependency-injector.ets-labs.org/providers/callable.html), 
-[objects](http://python-dependency-injector.ets-labs.org/providers/object.html) and [coroutines](http://python-dependency-injector.ets-labs.org/providers/coroutine.html).
-
-Next to these they have [one more provider](http://python-dependency-injector.ets-labs.org/providers/dependency.html) that allows you to create libraries and let the user define the dependency.  
-
-Score for scoping: [rating:5]
-
-#### Configurability
-
-Dependency Injector has many options to configure the application, which can all be done at the application top-level, 
-or at each module. Dependency Injector does not use Python 3 type hints, which means you have to configure everything by hand.
-So when you have a dependency that is used in a lot of places you have to pass it in everywhere.
-
-Score for configurability: [rating:4]
-
-#### Coupling
-
-Dependency injector lets you configure your IoC container at the top level of your application or module. 
-This makes it very flexible and loosely coupled. 
-
-Score for coupling: [rating: 5]
-
-#### Statistics
+<ul class="procon con">
+<li>Doesn't use static type checking</li>
+<li>No smart binding, which means you have to configure everything by hand</li>
+</ul>
 
 [![PyPI - License](https://img.shields.io/pypi/l/dependency_injector?style=for-the-badge&cacheSeconds=86400)](https://pypi.org/project/dependency-injector/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/dependency_injector?style=for-the-badge&cacheSeconds=86400)](https://pypi.org/project/dependency-injector/)
@@ -160,9 +134,22 @@ Score for coupling: [rating: 5]
 Pinject is a dependency injection container for Python created by Google. 
 It's primary goal is to help developers assemble objects into graphs in an easy, maintainable way.
 
-<ul>
-<li class="pro"><i class="fas fa-plus-circle"></i> foo</li>
-<li class="con"><img src="/img/test.svg#con"/> bar</li>
+<ul class="procon pro">
+<li>Uses implicit bindings for classes by default...</li>
+<li>... and has many configuration options</li>
+<li>Auto copying args to fields with decorators</li>
+<li>Binding specs for more complex bindings</li>
+<li>Binding specs for more complex bindings</li>
+<li>Defaults to Singleton scope which creates a new object on the first call and reuses it after that ...</li> 
+<li>... and it also supports Prototype scope which instantiates a new object on each call ...</li>
+<li>... and you can create your own custom scopes</li>
+<li>Possible to do partial injections.</li>
+<li>No separate config file.</li>
+</ul>
+
+<ul class="procon con">
+<li>Doesn't use static type checking</li>
+<li>Some features require the use of decorators, which couples Pinject to your application.</li>
 </ul>
 
 [![PyPI - License](https://img.shields.io/pypi/l/pinject?style=for-the-badge&cacheSeconds=86400)](https://pypi.org/project/pinject/)
@@ -176,6 +163,22 @@ It's primary goal is to help developers assemble objects into graphs in an easy,
 
 ### Injector
 
+Python dependency injection framework, inspired by Guice which aims for simplicity, doesn't use a global state and uses static type checking.
+
+<ul class="procon pro">
+<li>Uses static type checking to resolve dependencies</li>
+<li>Very simple to configure</li>
+<li>Supports dataclasses</li>
+<li>Helpers for testing</li>
+<li>Creates a new object on each call by default ...</li>
+<li>... and you can use `@singleton` ...</li>
+<li>... and you can create your own scopes</li>
+</ul>
+
+<ul class="procon con">
+<li>It looks like it forces the use of decorators, which couples Injector heavily to your application</li>
+</ul>
+
 [![PyPI - License](https://img.shields.io/pypi/l/injector?style=for-the-badge&cacheSeconds=86400)](https://pypi.org/project/injector/)
 [![Read the Docs](https://img.shields.io/readthedocs/injector?style=for-the-badge&cacheSeconds=86400)](https://injector.readthedocs.io/en/latest/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/injector?style=for-the-badge&cacheSeconds=86400)](https://pypi.org/project/injector/)
@@ -187,6 +190,21 @@ It's primary goal is to help developers assemble objects into graphs in an easy,
 [![GitHub commit activity](https://img.shields.io/github/contributors/alecthomas/injector?style=for-the-badge&cacheSeconds=86400)](https://github.com/alecthomas/injector)
 
 ### Python Inject
+
+Dependency injection the python way, the good way. Not a port of Guice or Spring.
+
+<ul class="procon pro">
+<li>Uses static type checking to resolve dependencies</li>
+<li>Very simple to configure</li>
+<li>Integrates with Django</li>
+<li>Partial injection</li>
+<li>Helpers for testing</li>
+<li>Binding of simple keys. (e.g. name and email)</li>
+</ul>
+
+<ul class="procon con">
+<li>Python Inject is coupled heavily into your application</li>
+</ul>
 
 [![PyPI - License](https://img.shields.io/pypi/l/inject?style=for-the-badge&cacheSeconds=86400)](https://pypi.org/project/Inject/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/inject?style=for-the-badge&cacheSeconds=86400)](https://pypi.org/project/Inject/)
