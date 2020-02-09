@@ -25,6 +25,9 @@ markdown-checklist = "^0.4.1"
 pelican-xref = "^0.1.0"
 markdown-ratings = "^0.1.0"
 markdown3-newtab = "^0.2.0"
+python-slugify = "^4.0.0"
+black = "^19.10b0"
+isort = "^4.3.21"
 
 [tool.poetry.dev-dependencies]
 typing-extensions = "^3.7.4"

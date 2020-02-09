@@ -21,15 +21,17 @@ def add_metadata(author: Author, generator: Generator):
     author_file_path = os.path.join(authors_dir, f"{author.slug}.md")
 
     if not exists(author_file_path):
-        logger.warning(f"No author file found for {author.slug} in {authors_dir} directory")
+        logger.warning(
+            f"No author file found for {author.slug} in {authors_dir} directory"
+        )
         return
 
-    md = markdown.Markdown(extensions=['meta'])
+    md = markdown.Markdown(extensions=["meta"])
 
-    with open(author_file_path, 'r') as f:
+    with open(author_file_path, "r") as f:
         author_file = md.convert(f.read())
 
-    setattr(author, 'description', author_file)
+    setattr(author, "description", author_file)
     for name, value in md.Meta.items():
         setattr(author, name, value[0])
 

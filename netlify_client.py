@@ -19,8 +19,8 @@ class NetlifyClient:
 
         url = f"https://api.netlify.com/api/v1/sites/{self.site}.netlify.com/deploys"
         headers = {
-            'Content-Type': 'application/zip',
-            'Authorization': f'Bearer {self.token}'
+            "Content-Type": "application/zip",
+            "Authorization": f"Bearer {self.token}",
         }
 
         with open(zip_file.filename, "rb") as output:
@@ -53,12 +53,12 @@ def create_zip(dir_name: str) -> ZipFile:
     file_path = retrieve_file_paths(dir_name)
 
     # printing the list of all files to be zipped
-    print('The following list of files will be zipped:')
+    print("The following list of files will be zipped:")
     for fileName in file_path:
         print(fileName)
 
     # writing files to a zipfile
-    zip_file = ZipFile(dir_name + '.zip', 'w')
+    zip_file = ZipFile(dir_name + ".zip", "w")
     with zip_file:
         # writing each file one by one
         for file in file_path:
