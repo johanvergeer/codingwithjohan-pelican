@@ -2,10 +2,6 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-from os import listdir
-from os.path import isfile, join
-
-import yaml
 from pymdownx import emoji
 
 AUTHOR = "Johan Vergeer"
