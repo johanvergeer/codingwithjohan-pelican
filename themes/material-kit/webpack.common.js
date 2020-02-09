@@ -41,20 +41,18 @@ module.exports = {
             loader: "css-loader",
           },
           {
-            loader: "sass-loader",
+            loader: "sass-loader?sourceMap",
             options: {
               sassOptions: {
                 indentWidth: 4,
-                includePaths: [
-                  'node_modules/material-kit/assets/scss',
-                ],
+                includePaths: [],
               },
             },
           }
         ]
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
             loader: "file-loader",
@@ -78,7 +76,7 @@ module.exports = {
             options: {
               name: "[name].[ext]",
               outputPath: "img/",
-              publicPath: "img/"
+              publicPath: "/theme/img/" // Path Pelican publishes the files to
             }
           },
           {
@@ -94,7 +92,7 @@ module.exports = {
           {loader: 'expose-loader', options: 'jQuery'},
           {loader: 'expose-loader', options: '$'}
         ]
-      },
+      }
     ]
   },
   plugins: [

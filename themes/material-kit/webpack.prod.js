@@ -33,7 +33,9 @@ module.exports = merge(common, {
         'card-header-icon', 'card-icon', 'card-body',
         'material-icons',
         // Table of contents
-        'toc'
+        'toc',
+        // Procon
+        'procon', 'pro', 'con'
       ]
     })
   ]
