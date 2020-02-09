@@ -1,5 +1,6 @@
 ---
 Title: ASP.NET Core seeding the database
+slug: aspnet-core-database-seeding
 Tags: C#, ASP.NET Core
 ---
 

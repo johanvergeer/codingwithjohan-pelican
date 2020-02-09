@@ -1,5 +1,6 @@
 ---
 Title: Multiple Inheritance in Python
+slug: python-multiple-inheritance
 xref: python-multiple-inheritance
 Tags: Python
 description: Multiple inheritance is a very powerful core concept of Python. In this article you will learn how to use it and what to look out for.

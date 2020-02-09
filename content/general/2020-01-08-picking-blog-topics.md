@@ -1,5 +1,6 @@
 ---
 Title: Picking Blog topics
+slug: picking-blog-topics
 ---
 
 

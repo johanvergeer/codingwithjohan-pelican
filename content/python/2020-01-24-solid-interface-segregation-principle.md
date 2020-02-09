@@ -1,5 +1,6 @@
 ---
 Title: Interface Segregation Principle with Python
+slug: python-interface-segregation-principle
 xref: python-interface-segregation-principle
 Tags: SOLID,Python,ISP,Interface Segregation principle
 description: This article explains how you can use Protocols to apply the Interface Segregation Principle in Python.

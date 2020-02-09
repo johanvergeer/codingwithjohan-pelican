@@ -1,5 +1,6 @@
 ---
 Title: VS Code Settings
+Title: vs-code-settings
 Tags: VS Code, Visual Studio Code
 ---
 

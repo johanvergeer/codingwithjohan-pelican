@@ -1,5 +1,6 @@
 ---
-Title: Python Dependency Injection Frameworks
+title: Python Dependency Injection Frameworks
+slug: python-dependency-injection-frameworks
 xref: python-dependency-injection-frameworks
 Tags: Python,Dependency Injection
 description: This article looks into Dependency Injection with Python and the frameworks available for you.

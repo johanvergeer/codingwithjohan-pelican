@@ -1,5 +1,6 @@
 ---
 Title: ASP.NET Core integration tests
+slug: aspnet-core-integration-tests
 Tags: C#, ASP.NET Core, Integration tests
 ---
 

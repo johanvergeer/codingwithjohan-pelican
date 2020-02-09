@@ -1,5 +1,6 @@
 ---
 Title: VS Code Extensions
+slug: vs-code-extensions
 Tags: VS Code, Visual Studio Code
 ---
 

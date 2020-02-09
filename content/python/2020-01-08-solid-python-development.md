@@ -1,5 +1,6 @@
 ---
 Title: How to write maintainable Python with SOLID principles
+slug: solid-python-development
 xref: solid-python-development
 Tags: SOLID,Python
 description: SOLID design Principles with Python. Why and How?

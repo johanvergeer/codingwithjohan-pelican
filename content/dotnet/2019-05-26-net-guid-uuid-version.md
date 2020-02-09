@@ -1,5 +1,6 @@
 ---
 Title: What is the Guid in .NET?
+slug: donet-guid
 Tags: .NET
 status: draft
 excerpt: This is the summary for a post

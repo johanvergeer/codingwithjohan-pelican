@@ -1,5 +1,6 @@
 ---
 Title: Dependency Inversion Principle with Python
+slug: python-dependency-inversion-principle
 xref: python-dependency-inversion-principle
 Tags: SOLID,Python,ISP,Interface Segregation principle
 description: In the fifth article on the SOLID Principles with Python we'll look at the Dependency Inversion Principle.

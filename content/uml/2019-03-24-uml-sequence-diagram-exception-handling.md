@@ -1,5 +1,6 @@
 ---
 Title: Exception handling in UML Sequence Diagram
+slug: uml-sequence-diagram-exception-handling
 Tags: UML, Sequence Diagrams
 ---
 
