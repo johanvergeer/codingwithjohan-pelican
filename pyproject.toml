@@ -32,6 +32,10 @@ isort = "^4.3.21"
 [tool.poetry.dev-dependencies]
 typing-extensions = "^3.7.4"
 
+[tool.isort]
+# Maintain compatibility with Black
+skip="publishconf.py,themes"
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
